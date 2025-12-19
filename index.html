@@ -118,6 +118,234 @@
       .animate-fade-in {
         animation: fadeIn 0.5s ease-out forwards;
       }
+
+      /* Advanced Animations */
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes slideInLeft {
+        from { opacity: 0; transform: translateX(-50px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+
+      @keyframes slideInRight {
+        from { opacity: 0; transform: translateX(50px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+
+      @keyframes slideInUp {
+        from { opacity: 0; transform: translateY(50px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes slideInDown {
+        from { opacity: 0; transform: translateY(-50px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes bounceIn {
+        0% { opacity: 0; transform: scale(0.3); }
+        50% { opacity: 1; transform: scale(1.05); }
+        70% { transform: scale(0.9); }
+        100% { opacity: 1; transform: scale(1); }
+      }
+
+      @keyframes zoomIn {
+        from { opacity: 0; transform: scale(0.5); }
+        to { opacity: 1; transform: scale(1); }
+      }
+
+      @keyframes rotateIn {
+        from { opacity: 0; transform: rotate(-180deg) scale(0.5); }
+        to { opacity: 1; transform: rotate(0deg) scale(1); }
+      }
+
+      @keyframes flipIn {
+        from { opacity: 0; transform: rotateY(-90deg); }
+        to { opacity: 1; transform: rotateY(0deg); }
+      }
+
+      @keyframes glow {
+        0%, 100% { box-shadow: 0 0 5px rgba(6, 182, 212, 0.5); }
+        50% { box-shadow: 0 0 20px rgba(6, 182, 212, 0.8), 0 0 30px rgba(6, 182, 212, 0.6); }
+      }
+
+      @keyframes pulse-glow {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(6, 182, 212, 0); }
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+      }
+
+      @keyframes float-reverse {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(10px); }
+      }
+
+      @keyframes wiggle {
+        0%, 7% { transform: rotateZ(0); }
+        15% { transform: rotateZ(-15deg); }
+        20% { transform: rotateZ(10deg); }
+        25% { transform: rotateZ(-10deg); }
+        30% { transform: rotateZ(6deg); }
+        35% { transform: rotateZ(-4deg); }
+        40%, 100% { transform: rotateZ(0); }
+      }
+
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+        20%, 40%, 60%, 80% { transform: translateX(5px); }
+      }
+
+      @keyframes heartbeat {
+        0%, 50%, 100% { transform: scale(1); }
+        25%, 75% { transform: scale(1.1); }
+      }
+
+      @keyframes typing {
+        from { width: 0; }
+        to { width: 100%; }
+      }
+
+      @keyframes blink {
+        0%, 50% { border-color: transparent; }
+        51%, 100% { border-color: #06b6d4; }
+      }
+
+      @keyframes gradient-shift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      @keyframes particle-float {
+        0% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+      }
+
+      @keyframes text-shadow-pulse {
+        0%, 100% { text-shadow: 0 0 5px rgba(6, 182, 212, 0.5); }
+        50% { text-shadow: 0 0 20px rgba(6, 182, 212, 0.8), 0 0 30px rgba(6, 182, 212, 0.6); }
+      }
+
+      @keyframes border-glow {
+        0%, 100% { border-color: rgba(6, 182, 212, 0.3); box-shadow: 0 0 0 rgba(6, 182, 212, 0.3); }
+        50% { border-color: rgba(6, 182, 212, 0.8); box-shadow: 0 0 20px rgba(6, 182, 212, 0.6); }
+      }
+
+      /* Utility Classes for Animations */
+      .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
+      .animate-slide-in-left { animation: slideInLeft 0.8s ease-out forwards; }
+      .animate-slide-in-right { animation: slideInRight 0.8s ease-out forwards; }
+      .animate-slide-in-up { animation: slideInUp 0.8s ease-out forwards; }
+      .animate-slide-in-down { animation: slideInDown 0.8s ease-out forwards; }
+      .animate-bounce-in { animation: bounceIn 0.8s ease-out forwards; }
+      .animate-zoom-in { animation: zoomIn 0.8s ease-out forwards; }
+      .animate-rotate-in { animation: rotateIn 0.8s ease-out forwards; }
+      .animate-flip-in { animation: flipIn 0.8s ease-out forwards; }
+      .animate-glow { animation: glow 2s ease-in-out infinite; }
+      .animate-pulse-glow { animation: pulse-glow 2s infinite; }
+      .animate-float { animation: float 3s ease-in-out infinite; }
+      .animate-float-reverse { animation: float-reverse 3s ease-in-out infinite; }
+      .animate-wiggle { animation: wiggle 1s ease-in-out; }
+      .animate-shake { animation: shake 0.5s ease-in-out; }
+      .animate-heartbeat { animation: heartbeat 1.5s ease-in-out infinite; }
+      .animate-typing { animation: typing 3s steps(40, end); }
+      .animate-blink { animation: blink 1s infinite; }
+      .animate-gradient-shift { animation: gradient-shift 3s ease infinite; }
+      .animate-text-shadow-pulse { animation: text-shadow-pulse 2s ease-in-out infinite; }
+      .animate-border-glow { animation: border-glow 2s ease-in-out infinite; }
+
+      /* Hover Animations */
+      .hover-scale { transition: transform 0.3s ease; }
+      .hover-scale:hover { transform: scale(1.05); }
+
+      .hover-rotate { transition: transform 0.3s ease; }
+      .hover-rotate:hover { transform: rotate(5deg); }
+
+      .hover-glow { transition: box-shadow 0.3s ease; }
+      .hover-glow:hover { box-shadow: 0 0 20px rgba(6, 182, 212, 0.6); }
+
+      .hover-lift { transition: transform 0.3s ease; }
+      .hover-lift:hover { transform: translateY(-5px); }
+
+      /* Scroll-triggered animations */
+      .scroll-fade-in { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+      .scroll-fade-in.in-view { opacity: 1; transform: translateY(0); }
+
+      .scroll-slide-left { opacity: 0; transform: translateX(-50px); transition: all 0.6s ease; }
+      .scroll-slide-left.in-view { opacity: 1; transform: translateX(0); }
+
+      .scroll-slide-right { opacity: 0; transform: translateX(50px); transition: all 0.6s ease; }
+      .scroll-slide-right.in-view { opacity: 1; transform: translateX(0); }
+
+      .scroll-zoom { opacity: 0; transform: scale(0.8); transition: all 0.6s ease; }
+      .scroll-zoom.in-view { opacity: 1; transform: scale(1); }
+
+      /* Particle effect */
+      .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: #06b6d4;
+        border-radius: 50%;
+        animation: particle-float 3s linear infinite;
+      }
+
+      /* Hologram effect */
+      .hologram {
+        background: linear-gradient(45deg, transparent 30%, rgba(6, 182, 212, 0.1) 50%, transparent 70%);
+        background-size: 200% 200%;
+        animation: hologram-shimmer 2s linear infinite;
+      }
+
+      @keyframes hologram-shimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+      }
+
+      /* Loading spinner */
+      .cyber-spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid rgba(6, 182, 212, 0.3);
+        border-top: 3px solid #06b6d4;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      /* Button ripple effect */
+      .ripple {
+        position: relative;
+        overflow: hidden;
+      }
+      .ripple::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+      }
+      .ripple:active::before {
+        width: 300px;
+        height: 300px;
+      }
       @keyframes fadeIn {
         from { opacity: 0; transform: scale(0.95); }
         to { opacity: 1; transform: scale(1); }
@@ -139,13 +367,13 @@
                 </a>
 
                 <!-- Desktop Nav -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="nav-link text-gray-300 hover:text-cyber-cyan text-sm font-medium transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-cyber-cyan after:left-0 after:-bottom-1 hover:after:w-full after:transition-all">Home</a>
-                    <a href="#services" class="nav-link text-gray-300 hover:text-cyber-cyan text-sm font-medium transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-cyber-cyan after:left-0 after:-bottom-1 hover:after:w-full after:transition-all">Services</a>
-                    <a href="#projects" class="nav-link text-gray-300 hover:text-cyber-cyan text-sm font-medium transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-cyber-cyan after:left-0 after:-bottom-1 hover:after:w-full after:transition-all">Projects</a>
-                    <a href="#certificates" class="nav-link text-gray-300 hover:text-cyber-cyan text-sm font-medium transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-cyber-cyan after:left-0 after:-bottom-1 hover:after:w-full after:transition-all">Awards</a>
-                    <a href="#contact" class="px-5 py-2 text-sm font-bold bg-transparent border border-cyber-cyan text-cyber-cyan rounded hover:bg-cyber-cyan hover:text-black transition-all shadow-[0_0_10px_rgba(6,182,212,0.2)] hover:shadow-[0_0_20px_rgba(6,182,212,0.6)] flex items-center gap-2">
-                        <i data-lucide="terminal" class="w-4 h-4"></i> HIRE ME
+                <div class="hidden md:flex items-center space-x-8 animate-slide-in-down">
+                    <a href="#home" class="nav-link text-gray-300 hover:text-cyber-cyan text-sm font-medium transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-cyber-cyan after:left-0 after:-bottom-1 hover:after:w-full after:transition-all hover-lift">Home</a>
+                    <a href="#services" class="nav-link text-gray-300 hover:text-cyber-cyan text-sm font-medium transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-cyber-cyan after:left-0 after:-bottom-1 hover:after:w-full after:transition-all hover-lift">Services</a>
+                    <a href="#projects" class="nav-link text-gray-300 hover:text-cyber-cyan text-sm font-medium transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-cyber-cyan after:left-0 after:-bottom-1 hover:after:w-full after:transition-all hover-lift">Projects</a>
+                    <a href="#certificates" class="nav-link text-gray-300 hover:text-cyber-cyan text-sm font-medium transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-cyber-cyan after:left-0 after:-bottom-1 hover:after:w-full after:transition-all hover-lift">Awards</a>
+                    <a href="#contact" class="px-5 py-2 text-sm font-bold bg-transparent border border-cyber-cyan text-cyber-cyan rounded hover:bg-cyber-cyan hover:text-black transition-all shadow-[0_0_10px_rgba(6,182,212,0.2)] hover:shadow-[0_0_20px_rgba(6,182,212,0.6)] flex items-center gap-2 hover-scale">
+                        <i data-lucide="terminal" class="w-4 h-4 animate-pulse-glow"></i> HIRE ME
                     </a>
                 </div>
 
@@ -180,13 +408,13 @@
             </div>
 
             <div class="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center z-10">
-                <div class="space-y-8">
-                    <div class="inline-flex items-center px-4 py-2 rounded-full border border-cyber-green/30 bg-cyber-green/5 text-cyber-green text-xs font-mono tracking-wider uppercase">
-                        <span class="w-2 h-2 rounded-full bg-cyber-green animate-pulse mr-2 shadow-[0_0_10px_#10b981]"></span>
+                <div class="space-y-8 animate-slide-in-left">
+                    <div class="inline-flex items-center px-4 py-2 rounded-full border border-cyber-green/30 bg-cyber-green/5 text-cyber-green text-xs font-mono tracking-wider uppercase animate-bounce-in hover-scale">
+                        <span class="w-2 h-2 rounded-full bg-cyber-green animate-pulse mr-2 shadow-[0_0_10px_#10b981] animate-glow"></span>
                         System Online & Ready
                     </div>
                     
-                    <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white leading-tight">
+                    <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white leading-tight animate-zoom-in">
                         Halo, Saya <br />
                         <span class="relative inline-block group">
                             <span class="absolute -inset-1 bg-gradient-to-r from-cyber-cyan to-cyber-green blur opacity-30 group-hover:opacity-70 transition duration-500"></span>
@@ -197,31 +425,31 @@
                     </h1>
                     
                     <div class="h-8">
-                        <p class="text-xl sm:text-2xl text-gray-300 font-mono">
-                            I am a <span id="typewriter" class="text-cyber-cyan border-r-2 border-cyber-cyan pr-1 animate-pulse"></span>
+                        <p class="text-xl sm:text-2xl text-gray-300 font-mono animate-typing">
+                            I am a <span id="typewriter" class="text-cyber-cyan border-r-2 border-cyber-cyan pr-1 animate-blink"></span>
                         </p>
                     </div>
 
-                    <p class="text-gray-400 max-w-lg leading-relaxed text-lg">
+                    <p class="text-gray-400 max-w-lg leading-relaxed text-lg animate-fade-in">
                         Membangun arsitektur digital yang presisi dan mengamankannya dari ancaman tak terlihat. Solusi end-to-end untuk kebutuhan web dan keamanan Anda.
                     </p>
 
-                    <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                        <a href="#contact" class="group relative px-8 py-3 bg-cyber-cyan text-black font-bold rounded overflow-hidden">
+                    <div class="flex flex-col sm:flex-row gap-4 pt-4 animate-slide-in-up">
+                        <a href="#contact" class="group relative px-8 py-3 bg-cyber-cyan text-black font-bold rounded overflow-hidden hover-scale">
                             <div class="absolute inset-0 w-full h-full bg-white/20 transform -translate-x-full skew-x-12 group-hover:animate-[shimmer_1s_infinite]"></div>
                             <span class="relative flex items-center">
-                                Mulai Proyek <i data-lucide="arrow-right" class="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform"></i>
+                                Mulai Proyek <i data-lucide="arrow-right" class="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform animate-float"></i>
                             </span>
                         </a>
-                        <a href="#projects" class="px-8 py-3 border border-gray-600 text-gray-300 font-medium rounded hover:border-cyber-green hover:text-cyber-green transition-all bg-transparent hover:bg-cyber-green/5">
+                        <a href="#projects" class="px-8 py-3 border border-gray-600 text-gray-300 font-medium rounded hover:border-cyber-green hover:text-cyber-green transition-all bg-transparent hover:bg-cyber-green/5 hover-scale animate-border-glow">
                             Lihat Karya
                         </a>
                     </div>
                 </div>
 
-                <div class="relative flex justify-center lg:justify-end group perspective-1000">
-                    <div class="relative w-full max-w-md aspect-square transform transition-transform duration-700 group-hover:rotate-y-12 group-hover:rotate-x-6">
-                        <div class="absolute -inset-2 border-2 border-cyber-cyan/30 rounded-2xl z-0"></div>
+                <div class="relative flex justify-center lg:justify-end group perspective-1000 animate-slide-in-right">
+                    <div class="relative w-full max-w-md aspect-square transform transition-transform duration-700 group-hover:rotate-y-12 group-hover:rotate-x-6 animate-float-reverse">
+                        <div class="absolute -inset-2 border-2 border-cyber-cyan/30 rounded-2xl z-0 animate-border-glow"></div>
                         <div class="absolute -inset-2 border-2 border-cyber-green/30 rounded-2xl z-0 transform rotate-3"></div>
                         
                         <div class="relative rounded-2xl bg-cyber-slate border border-gray-700 overflow-hidden w-full h-full shadow-2xl z-10">
@@ -232,9 +460,9 @@
                                 <div class="flex justify-between items-end">
                                     <div>
                                         <div class="text-cyber-cyan font-mono text-xs mb-1">ID: 0x93FA</div>
-                                        <div class="text-white font-bold text-lg">Cyber Security Expert</div>
+                                        <div class="text-white font-bold text-lg animate-text-shadow-pulse">Cyber Security Expert</div>
                                     </div>
-                                    <i data-lucide="shield" class="text-cyber-green w-8 h-8 animate-pulse-slow"></i>
+                                    <i data-lucide="shield" class="text-cyber-green w-8 h-8 animate-pulse-slow animate-glow"></i>
                                 </div>
                             </div>
                         </div>
@@ -242,7 +470,7 @@
                 </div>
             </div>
 
-            <a href="#services" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-gray-500 hover:text-cyber-cyan transition-colors animate-bounce">
+            <a href="#services" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-gray-500 hover:text-cyber-cyan transition-colors animate-bounce hover-scale">
                 <span class="text-xs font-mono mb-2">SCROLL</span>
                 <i data-lucide="chevron-down" class="w-5 h-5"></i>
             </a>
@@ -251,18 +479,18 @@
         <!-- Services Section -->
         <section id="services" class="py-24 px-4 sm:px-6 lg:px-8 bg-cyber-slate/30 relative">
             <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-16">
+                <div class="text-center mb-16 animate-zoom-in">
                     <h2 class="text-3xl font-bold text-white sm:text-4xl mb-4">Layanan & Keahlian</h2>
-                    <div class="w-24 h-1 bg-gradient-to-r from-transparent via-cyber-green to-transparent mx-auto rounded-full"></div>
-                    <p class="mt-4 text-gray-400 max-w-2xl mx-auto">
+                    <div class="w-24 h-1 bg-gradient-to-r from-transparent via-cyber-green to-transparent mx-auto rounded-full animate-gradient-shift"></div>
+                    <p class="mt-4 text-gray-400 max-w-2xl mx-auto animate-fade-in">
                         Kombinasi skill programming dan hacking untuk solusi digital yang tidak hanya indah, tapi juga tangguh.
                     </p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="relative group">
-                        <div class="absolute -inset-0.5 bg-gradient-to-r from-cyber-cyan to-cyber-green rounded-xl blur opacity-0 group-hover:opacity-60 transition duration-500"></div>
-                        <div class="relative h-full bg-cyber-dark p-6 rounded-xl border border-gray-800 group-hover:border-transparent transition-all duration-300 flex flex-col">
+                    <div class="relative group animate-fade-in" style="animation-delay: 0.1s;">
+                        <div class="absolute -inset-0.5 bg-gradient-to-r from-cyber-cyan to-cyber-green rounded-xl blur opacity-0 group-hover:opacity-60 transition duration-500 animate-pulse-glow"></div>
+                        <div class="relative h-full bg-cyber-dark p-6 rounded-xl border border-gray-800 group-hover:border-transparent transition-all duration-300 flex flex-col hover-lift">
                             <div class="w-14 h-14 bg-gray-900 rounded-lg flex items-center justify-center mb-6 group-hover:bg-gray-800 transition-colors border border-gray-700 group-hover:border-cyber-cyan/50">
                                 <i data-lucide="code" class="text-cyber-cyan w-7 h-7"></i>
                             </div>
@@ -270,31 +498,31 @@
                             <p class="text-gray-400 text-sm leading-relaxed flex-1">Pembuatan website modern (React/Next.js) dengan penerapan best practice keamanan sejak baris kode pertama.</p>
                         </div>
                     </div>
-                    <div class="relative group">
-                         <div class="absolute -inset-0.5 bg-gradient-to-r from-cyber-cyan to-cyber-green rounded-xl blur opacity-0 group-hover:opacity-60 transition duration-500"></div>
-                        <div class="relative h-full bg-cyber-dark p-6 rounded-xl border border-gray-800 group-hover:border-transparent transition-all duration-300 flex flex-col">
-                            <div class="w-14 h-14 bg-gray-900 rounded-lg flex items-center justify-center mb-6 group-hover:bg-gray-800 transition-colors border border-gray-700 group-hover:border-cyber-cyan/50">
-                                <i data-lucide="search" class="text-cyber-green w-7 h-7"></i>
+                    <div class="relative group animate-fade-in" style="animation-delay: 0.2s;">
+                         <div class="absolute -inset-0.5 bg-gradient-to-r from-cyber-cyan to-cyber-green rounded-xl blur opacity-0 group-hover:opacity-60 transition duration-500 animate-pulse-glow"></div>
+                        <div class="relative h-full bg-cyber-dark p-6 rounded-xl border border-gray-800 group-hover:border-transparent transition-all duration-300 flex flex-col hover-lift">
+                            <div class="w-14 h-14 bg-gray-900 rounded-lg flex items-center justify-center mb-6 group-hover:bg-gray-800 transition-colors border border-gray-700 group-hover:border-cyber-cyan/50 animate-float-reverse">
+                                <i data-lucide="search" class="text-cyber-green w-7 h-7 animate-pulse-glow"></i>
                             </div>
                             <h3 class="text-xl font-bold text-white mb-3 group-hover:text-cyber-cyan transition-colors">Vulnerability Assessment</h3>
                             <p class="text-gray-400 text-sm leading-relaxed flex-1">Analisis menyeluruh untuk menemukan celah keamanan pada aplikasi web atau jaringan Anda.</p>
                         </div>
                     </div>
-                    <div class="relative group">
-                         <div class="absolute -inset-0.5 bg-gradient-to-r from-cyber-cyan to-cyber-green rounded-xl blur opacity-0 group-hover:opacity-60 transition duration-500"></div>
-                        <div class="relative h-full bg-cyber-dark p-6 rounded-xl border border-gray-800 group-hover:border-transparent transition-all duration-300 flex flex-col">
-                            <div class="w-14 h-14 bg-gray-900 rounded-lg flex items-center justify-center mb-6 group-hover:bg-gray-800 transition-colors border border-gray-700 group-hover:border-cyber-cyan/50">
-                                <i data-lucide="shield" class="text-blue-500 w-7 h-7"></i>
+                    <div class="relative group animate-fade-in" style="animation-delay: 0.3s;">
+                         <div class="absolute -inset-0.5 bg-gradient-to-r from-cyber-cyan to-cyber-green rounded-xl blur opacity-0 group-hover:opacity-60 transition duration-500 animate-pulse-glow"></div>
+                        <div class="relative h-full bg-cyber-dark p-6 rounded-xl border border-gray-800 group-hover:border-transparent transition-all duration-300 flex flex-col hover-lift">
+                            <div class="w-14 h-14 bg-gray-900 rounded-lg flex items-center justify-center mb-6 group-hover:bg-gray-800 transition-colors border border-gray-700 group-hover:border-cyber-cyan/50 animate-float">
+                                <i data-lucide="shield" class="text-blue-500 w-7 h-7 animate-pulse-glow"></i>
                             </div>
                             <h3 class="text-xl font-bold text-white mb-3 group-hover:text-cyber-cyan transition-colors">Penetration Testing</h3>
                             <p class="text-gray-400 text-sm leading-relaxed flex-1">Simulasi serangan siber etis untuk menguji ketahanan sistem pertahanan digital perusahaan Anda.</p>
                         </div>
                     </div>
-                    <div class="relative group">
-                         <div class="absolute -inset-0.5 bg-gradient-to-r from-cyber-cyan to-cyber-green rounded-xl blur opacity-0 group-hover:opacity-60 transition duration-500"></div>
-                        <div class="relative h-full bg-cyber-dark p-6 rounded-xl border border-gray-800 group-hover:border-transparent transition-all duration-300 flex flex-col">
-                            <div class="w-14 h-14 bg-gray-900 rounded-lg flex items-center justify-center mb-6 group-hover:bg-gray-800 transition-colors border border-gray-700 group-hover:border-cyber-cyan/50">
-                                <i data-lucide="lock" class="text-purple-500 w-7 h-7"></i>
+                    <div class="relative group animate-fade-in" style="animation-delay: 0.4s;">
+                         <div class="absolute -inset-0.5 bg-gradient-to-r from-cyber-cyan to-cyber-green rounded-xl blur opacity-0 group-hover:opacity-60 transition duration-500 animate-pulse-glow"></div>
+                        <div class="relative h-full bg-cyber-dark p-6 rounded-xl border border-gray-800 group-hover:border-transparent transition-all duration-300 flex flex-col hover-lift">
+                            <div class="w-14 h-14 bg-gray-900 rounded-lg flex items-center justify-center mb-6 group-hover:bg-gray-800 transition-colors border border-gray-700 group-hover:border-cyber-cyan/50 animate-float-reverse">
+                                <i data-lucide="lock" class="text-purple-500 w-7 h-7 animate-pulse-glow"></i>
                             </div>
                             <h3 class="text-xl font-bold text-white mb-3 group-hover:text-cyber-cyan transition-colors">Security Consulting</h3>
                             <p class="text-gray-400 text-sm leading-relaxed flex-1">Konsultasi strategi keamanan, hardening server, dan edukasi awareness keamanan untuk tim.</p>
@@ -309,22 +537,22 @@
             <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyber-cyan/30 to-transparent"></div>
             
             <div class="max-w-7xl mx-auto">
-                <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-12 animate-slide-in-up">
                     <div>
                         <h2 class="text-3xl font-bold text-white sm:text-4xl mb-2 flex items-center">
-                            <span class="text-cyber-cyan mr-2">&lt;</span>
+                            <span class="text-cyber-cyan mr-2 animate-pulse-glow">&lt;</span>
                             Proyek Saya
-                            <span class="text-cyber-cyan ml-2">/&gt;</span>
+                            <span class="text-cyber-cyan ml-2 animate-pulse-glow">/&gt;</span>
                         </h2>
-                        <div class="w-20 h-1 bg-cyber-cyan rounded-full mt-2"></div>
+                        <div class="w-20 h-1 bg-cyber-cyan rounded-full mt-2 animate-gradient-shift"></div>
                     </div>
                     
                     <!-- Filter Buttons -->
-                    <div class="flex space-x-2 mt-6 md:mt-0 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto" id="portfolio-filters">
-                        <button class="filter-btn active flex items-center px-4 py-2 rounded text-sm font-medium transition-all whitespace-nowrap bg-cyber-cyan text-black shadow-[0_0_10px_rgba(6,182,212,0.5)]" data-filter="all">All Projects</button>
-                        <button class="filter-btn flex items-center px-4 py-2 rounded text-sm font-medium transition-all whitespace-nowrap bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white" data-filter="web"><i data-lucide="code" class="w-4 h-4 mr-2"></i>Web Dev</button>
-                        <button class="filter-btn flex items-center px-4 py-2 rounded text-sm font-medium transition-all whitespace-nowrap bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white" data-filter="security"><i data-lucide="lock" class="w-4 h-4 mr-2"></i>Security</button>
-                        <button class="filter-btn flex items-center px-4 py-2 rounded text-sm font-medium transition-all whitespace-nowrap bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white" data-filter="network"><i data-lucide="server" class="w-4 h-4 mr-2"></i>Network</button>
+                    <div class="flex space-x-2 mt-6 md:mt-0 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto animate-slide-in-right">
+                        <button class="filter-btn active flex items-center px-4 py-2 rounded text-sm font-medium transition-all whitespace-nowrap bg-cyber-cyan text-black shadow-[0_0_10px_rgba(6,182,212,0.5)] hover-scale" data-filter="all">All Projects</button>
+                        <button class="filter-btn flex items-center px-4 py-2 rounded text-sm font-medium transition-all whitespace-nowrap bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white hover-scale animate-border-glow" data-filter="web"><i data-lucide="code" class="w-4 h-4 mr-2 animate-float"></i>Web Dev</button>
+                        <button class="filter-btn flex items-center px-4 py-2 rounded text-sm font-medium transition-all whitespace-nowrap bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white hover-scale animate-border-glow" data-filter="security"><i data-lucide="lock" class="w-4 h-4 mr-2 animate-float-reverse"></i>Security</button>
+                        <button class="filter-btn flex items-center px-4 py-2 rounded text-sm font-medium transition-all whitespace-nowrap bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white hover-scale animate-border-glow" data-filter="network"><i data-lucide="server" class="w-4 h-4 mr-2 animate-float"></i>Network</button>
                     </div>
                 </div>
 
@@ -460,29 +688,29 @@
         <section id="contact" class="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-cyber-slate/50 to-cyber-dark relative overflow-hidden">
              <div class="max-w-7xl mx-auto relative z-10">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                    <div>
+                    <div class="animate-slide-in-left">
                         <h2 class="text-4xl font-bold text-white mb-6">Let's Secure Your Future</h2>
-                        <p class="text-gray-400 mb-8 leading-relaxed text-lg">
+                        <p class="text-gray-400 mb-8 leading-relaxed text-lg animate-fade-in">
                             Tertarik untuk berkolaborasi dalam proyek web development atau membutuhkan audit keamanan?
                         </p>
                         
                         <div class="space-y-6">
-                            <div class="group flex items-center p-4 bg-cyber-slate/50 rounded-xl border border-gray-800 hover:border-cyber-cyan/50 transition-all cursor-pointer" onclick="copyEmail()">
-                                <div class="flex-shrink-0 bg-gray-900 p-3 rounded-lg">
-                                    <i data-lucide="mail" class="w-6 h-6 text-cyber-cyan"></i>
+                            <div class="group flex items-center p-4 bg-cyber-slate/50 rounded-xl border border-gray-800 hover:border-cyber-cyan/50 transition-all cursor-pointer hover-lift animate-fade-in" onclick="copyEmail()" style="animation-delay: 0.1s;">
+                                <div class="flex-shrink-0 bg-gray-900 p-3 rounded-lg animate-float">
+                                    <i data-lucide="mail" class="w-6 h-6 text-cyber-cyan animate-pulse-glow"></i>
                                 </div>
                                 <div class="ml-4 flex-1">
                                     <h3 class="text-white font-medium text-sm">Email Address</h3>
                                     <p class="text-gray-400 font-mono text-sm" id="contact-email">agustriananda20@yahoo.com</p>
                                 </div>
                                 <div class="mr-2">
-                                     <i id="copy-icon" data-lucide="copy" class="w-5 h-5 text-gray-500 group-hover:text-white"></i>
+                                     <i id="copy-icon" data-lucide="copy" class="w-5 h-5 text-gray-500 group-hover:text-white animate-wiggle"></i>
                                 </div>
                             </div>
 
-                            <div class="flex items-center p-4 bg-cyber-slate/50 rounded-xl border border-gray-800 hover:border-cyber-green/50 transition-all cursor-pointer" onclick="window.open('https://wa.me/6285756444803', '_blank')">
-                                <div class="flex-shrink-0 bg-gray-900 p-3 rounded-lg">
-                                    <i data-lucide="phone" class="w-6 h-6 text-cyber-green"></i>
+                            <div class="flex items-center p-4 bg-cyber-slate/50 rounded-xl border border-gray-800 hover:border-cyber-green/50 transition-all cursor-pointer hover-lift animate-fade-in" onclick="window.open('https://wa.me/6285756444803', '_blank')" style="animation-delay: 0.2s;">
+                                <div class="flex-shrink-0 bg-gray-900 p-3 rounded-lg animate-float-reverse">
+                                    <i data-lucide="phone" class="w-6 h-6 text-cyber-green animate-pulse-glow"></i>
                                 </div>
                                 <div class="ml-4">
                                     <h3 class="text-white font-medium text-sm">WhatsApp</h3>
@@ -490,9 +718,9 @@
                                 </div>
                             </div>
 
-                            <div class="flex items-center p-4 bg-cyber-slate/50 rounded-xl border border-gray-800 hover:border-pink-500/50 transition-all cursor-pointer" onclick="window.open('https://instagram.com/agstriananda', '_blank')">
-                                <div class="flex-shrink-0 bg-gray-900 p-3 rounded-lg">
-                                    <i data-lucide="instagram" class="w-6 h-6 text-pink-500"></i>
+                            <div class="flex items-center p-4 bg-cyber-slate/50 rounded-xl border border-gray-800 hover:border-pink-500/50 transition-all cursor-pointer hover-lift animate-fade-in" onclick="window.open('https://instagram.com/agstriananda', '_blank')" style="animation-delay: 0.3s;">
+                                <div class="flex-shrink-0 bg-gray-900 p-3 rounded-lg animate-float">
+                                    <i data-lucide="instagram" class="w-6 h-6 text-pink-500 animate-pulse-glow"></i>
                                 </div>
                                 <div class="ml-4">
                                     <h3 class="text-white font-medium text-sm">Instagram</h3>
@@ -500,9 +728,9 @@
                                 </div>
                             </div>
 
-                            <div class="flex items-center p-4 bg-cyber-slate/50 rounded-xl border border-gray-800 hover:border-gray-300/50 transition-all cursor-pointer" onclick="window.open('https://github.com/AgusDevSec', '_blank')">
-                                <div class="flex-shrink-0 bg-gray-900 p-3 rounded-lg">
-                                    <i data-lucide="github" class="w-6 h-6 text-gray-300"></i>
+                            <div class="flex items-center p-4 bg-cyber-slate/50 rounded-xl border border-gray-800 hover:border-gray-300/50 transition-all cursor-pointer hover-lift animate-fade-in" onclick="window.open('https://github.com/AgusDevSec', '_blank')" style="animation-delay: 0.4s;">
+                                <div class="flex-shrink-0 bg-gray-900 p-3 rounded-lg animate-float-reverse">
+                                    <i data-lucide="github" class="w-6 h-6 text-gray-300 animate-pulse-glow"></i>
                                 </div>
                                 <div class="ml-4">
                                     <h3 class="text-white font-medium text-sm">GitHub</h3>
@@ -512,28 +740,28 @@
                         </div>
                     </div>
 
-                    <div class="bg-cyber-slate/80 backdrop-blur-sm p-8 rounded-2xl border border-gray-700 shadow-2xl relative">
+                    <div class="bg-cyber-slate/80 backdrop-blur-sm p-8 rounded-2xl border border-gray-700 shadow-2xl relative animate-slide-in-right">
                         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyber-cyan to-cyber-green rounded-t-2xl"></div>
                         <h3 class="text-2xl font-bold text-white mb-6">Send Message</h3>
                         
                         <form id="contact-form" class="space-y-6">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                <div>
+                                <div class="animate-slide-in-up" style="animation-delay: 0.1s;">
                                     <label class="block text-xs font-mono text-cyber-cyan mb-2">/ NAME</label>
                                     <input type="text" name="name" required class="w-full bg-black/40 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-cyan focus:ring-1 focus:ring-cyber-cyan transition-colors" placeholder="John Doe" />
                                 </div>
-                                <div>
-                                    <label class="block text-xs font-mono text-cyber-cyan mb-2">/ EMAIL</label>
-                                    <input type="email" name="email" required class="w-full bg-black/40 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-cyan focus:ring-1 focus:ring-cyber-cyan transition-colors" placeholder="john@example.com" />
+                                <div class="animate-slide-in-up" style="animation-delay: 0.2s;">
+                                    <label class="block text-xs font-mono text-cyber-cyan mb-2 animate-pulse-glow">/ EMAIL</label>
+                                    <input type="email" name="email" required class="w-full bg-black/40 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-cyan focus:ring-1 focus:ring-cyber-cyan transition-colors hover-scale animate-border-glow" placeholder="john@example.com" />
                                 </div>
                             </div>
-                            <div>
-                                <label class="block text-xs font-mono text-cyber-cyan mb-2">/ MESSAGE</label>
-                                <textarea rows="4" name="message" required class="w-full bg-black/40 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-cyan focus:ring-1 focus:ring-cyber-cyan transition-colors" placeholder="System breach detected... just kidding. Hello!"></textarea>
+                            <div class="animate-slide-in-up" style="animation-delay: 0.3s;">
+                                <label class="block text-xs font-mono text-cyber-cyan mb-2 animate-pulse-glow">/ MESSAGE</label>
+                                <textarea rows="4" name="message" required class="w-full bg-black/40 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-cyan focus:ring-1 focus:ring-cyber-cyan transition-colors hover-scale animate-border-glow" placeholder="System breach detected... just kidding. Hello!"></textarea>
                             </div>
                             
-                            <button type="submit" id="submit-btn" class="w-full flex justify-center items-center py-4 px-4 bg-cyber-cyan text-black rounded-lg shadow-sm text-sm font-bold tracking-wider uppercase transition-all duration-300 hover:bg-cyan-400">
-                                <span>Init Communication</span> <i data-lucide="send" class="ml-2 w-4 h-4"></i>
+                            <button type="submit" id="submit-btn" class="w-full flex justify-center items-center py-4 px-4 bg-cyber-cyan text-black rounded-lg shadow-sm text-sm font-bold tracking-wider uppercase transition-all duration-300 hover:bg-cyan-400 hover-scale animate-slide-in-up" style="animation-delay: 0.4s;">
+                                <span>Init Communication</span> <i data-lucide="send" class="ml-2 w-4 h-4 animate-float"></i>
                             </button>
                         </form>
                     </div>
@@ -542,7 +770,7 @@
         </section>
     </main>
 
-    <footer class="bg-cyber-dark border-t border-gray-800 py-8 px-4 text-center">
+    <footer class="bg-cyber-dark border-t border-gray-800 py-8 px-4 text-center animate-fade-in">
         <p class="text-gray-500 text-sm">
             &copy; 2025 AgusDevSec. All rights reserved. <br/>
             <span class="text-xs text-gray-600 mt-2 block">Thank you for visiting and using our services!</span>
@@ -550,15 +778,15 @@
     </footer>
 
     <!-- Chatbot Floating Button & Modal -->
-    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end font-sans">
-        <div id="chat-window" class="hidden mb-4 w-[350px] sm:w-[400px] h-[500px] bg-cyber-slate border border-gray-700 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end font-sans animate-bounce-in" style="animation-delay: 1s;">
+        <div id="chat-window" class="hidden mb-4 w-[350px] sm:w-[400px] h-[500px] bg-cyber-slate border border-gray-700 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-zoom-in">
              <div class="bg-cyber-dark p-4 border-b border-gray-700 flex justify-between items-center">
                 <div class="flex items-center space-x-3">
                     <div class="w-8 h-8 rounded-full bg-cyber-green/20 flex items-center justify-center border border-cyber-green/50">
                         <i data-lucide="bot" class="w-5 h-5 text-cyber-green"></i>
                     </div>
                     <div>
-                        <h3 class="text-white font-medium text-sm">Cyber Assistant</h3>
+                        <h3 class="text-white font-medium text-sm">ChatBot</h3>
                         <span class="text-xs text-cyber-cyan flex items-center gap-1">
                             <span class="w-1.5 h-1.5 rounded-full bg-cyber-cyan animate-pulse"></span>
                             Online
@@ -980,6 +1208,59 @@
       // Enter key support
       document.getElementById('chat-input').addEventListener('keypress', (e) => {
         if (e.key === 'Enter') window.sendMessage();
+      });
+
+      // ===========================================
+      // ADVANCED ANIMATIONS & INTERACTIONS
+      // ===========================================
+
+      // Intersection Observer for scroll animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+          }
+        });
+      }, observerOptions);
+
+      // Observe elements for scroll animations
+      document.querySelectorAll('.scroll-fade-in, .scroll-slide-left, .scroll-slide-right, .scroll-zoom').forEach(el => {
+        observer.observe(el);
+      });
+
+      // Add hover animations to buttons
+      document.querySelectorAll('button, .filter-btn, a[href]').forEach(btn => {
+        btn.classList.add('hover-scale', 'hover-glow');
+      });
+
+      // Add floating animation to icons
+      document.querySelectorAll('i[data-lucide]').forEach((icon, index) => {
+        if (index % 2 === 0) {
+          icon.classList.add('animate-float');
+        } else {
+          icon.classList.add('animate-float-reverse');
+        }
+        icon.style.animationDelay = `${index * 0.5}s`;
+      });
+
+      // Initialize all animations
+      document.addEventListener('DOMContentLoaded', () => {
+        // Enhanced mobile menu animation
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenu) {
+          const mobileBtn = document.getElementById('mobile-menu-btn');
+          mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.add('animate-slide-in-down');
+          });
+        }
+
+        console.log('✨ Website loaded successfully!');
       });
 
     </script>
