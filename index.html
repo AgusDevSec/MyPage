@@ -4,9 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AgusDevSec | Web Dev & Cyber Security</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <script src="https://unpkg.com/lucide@latest"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
     <script>
       tailwind.config = {
         theme: {
@@ -45,12 +49,16 @@
         }
       }
     </script>
+
+    <!-- Custom CSS -->
     <style>
       body {
         background-color: #050a14;
         color: #e2e8f0;
         cursor: crosshair;
       }
+      
+      /* Scanline Effect */
       body::before {
         content: "";
         position: fixed;
@@ -69,6 +77,8 @@
         z-index: 50;
         opacity: 0.3;
       }
+
+      /* Custom Scrollbar */
       ::-webkit-scrollbar {
         width: 10px;
       }
@@ -91,6 +101,8 @@
       .animate-fade-in {
         animation: fadeIn 0.5s ease-out forwards;
       }
+
+      /* Advanced Animations */
       @keyframes fadeIn {
         from { opacity: 0; transform: translateY(20px); }
         to { opacity: 1; transform: translateY(0); }
@@ -205,10 +217,90 @@
         50% { text-shadow: 0 0 20px rgba(6, 182, 212, 0.8), 0 0 30px rgba(6, 182, 212, 0.6); }
       }
 
-      @keyframes border-glow {
-        0%, 100% { border-color: rgba(6, 182, 212, 0.3); box-shadow: 0 0 0 rgba(6, 182, 212, 0.3); }
-        50% { border-color: rgba(6, 182, 212, 0.8); box-shadow: 0 0 20px rgba(6, 182, 212, 0.6); }
+      @keyframes stack-slide-up {
+        0% { transform: translateY(0) rotate(0deg) scale(1); z-index: 2; opacity: 1; }
+        15% { transform: translateY(-3px) rotate(0.3deg) scale(0.99); z-index: 3; opacity: 0.95; }
+        35% { transform: translateY(-10px) rotate(1deg) scale(0.96); z-index: 3; opacity: 0.85; }
+        60% { transform: translateY(-20px) rotate(1.8deg) scale(0.93); z-index: 2; opacity: 0.7; }
+        85% { transform: translateY(-28px) rotate(2.5deg) scale(0.89); z-index: 2; opacity: 0.4; }
+        100% { transform: translateY(-32px) rotate(2.8deg) scale(0.87); z-index: 1; opacity: 0; }
       }
+
+      @keyframes stack-slide-down {
+        0% { transform: translateY(0) rotate(0deg) scale(1); z-index: 2; opacity: 1; }
+        15% { transform: translateY(-3px) rotate(0.3deg) scale(0.99); z-index: 3; opacity: 0.95; }
+        35% { transform: translateY(-10px) rotate(1deg) scale(0.96); z-index: 3; opacity: 0.85; }
+        60% { transform: translateY(-20px) rotate(1.8deg) scale(0.93); z-index: 2; opacity: 0.7; }
+        85% { transform: translateY(-28px) rotate(2.5deg) scale(0.89); z-index: 2; opacity: 0.4; }
+        100% { transform: translateY(-32px) rotate(2.8deg) scale(0.87); z-index: 1; opacity: 0; }
+      }
+
+      @keyframes stack-enter-up {
+        0% { transform: translateY(32px) rotate(-2.8deg) scale(0.87); z-index: 1; opacity: 0; }
+        15% { transform: translateY(28px) rotate(-2.5deg) scale(0.89); z-index: 2; opacity: 0.4; }
+        35% { transform: translateY(20px) rotate(-1.8deg) scale(0.93); z-index: 2; opacity: 0.7; }
+        60% { transform: translateY(10px) rotate(-1deg) scale(0.96); z-index: 3; opacity: 0.85; }
+        85% { transform: translateY(3px) rotate(-0.3deg) scale(0.99); z-index: 3; opacity: 0.95; }
+        100% { transform: translateY(0) rotate(0deg) scale(1); z-index: 2; opacity: 1; }
+      }
+
+      @keyframes stack-enter-down {
+        0% { transform: translateY(32px) rotate(-2.8deg) scale(0.87); z-index: 1; opacity: 0; }
+        15% { transform: translateY(28px) rotate(-2.5deg) scale(0.89); z-index: 2; opacity: 0.4; }
+        35% { transform: translateY(20px) rotate(-1.8deg) scale(0.93); z-index: 2; opacity: 0.7; }
+        60% { transform: translateY(10px) rotate(-1deg) scale(0.96); z-index: 3; opacity: 0.85; }
+        85% { transform: translateY(3px) rotate(-0.3deg) scale(0.99); z-index: 3; opacity: 0.95; }
+        100% { transform: translateY(0) rotate(0deg) scale(1); z-index: 2; opacity: 1; }
+      }
+
+      /* Stacked Card Slideshow Styles */
+      .slideshow-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        perspective: 1000px;
+      }
+
+      .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      .slide:nth-child(1) {
+        z-index: 2;
+        transform: translateY(0) rotate(0deg) scale(1);
+      }
+
+      .slide:nth-child(2) {
+        z-index: 1;
+        transform: translateY(-10px) rotate(2deg) scale(0.95);
+        opacity: 0.9;
+      }
+
+      .slide.leaving-up {
+        animation: stack-slide-up 2.5s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+      }
+
+      .slide.leaving-down {
+        animation: stack-slide-down 2.5s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+      }
+
+      .slide.entering-up {
+        animation: stack-enter-up 2.5s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+      }
+
+      .slide.entering-down {
+        animation: stack-enter-down 2.5s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+      }
+
+      /* Utility Classes for Animations */
       .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
       .animate-slide-in-left { animation: slideInLeft 0.8s ease-out forwards; }
       .animate-slide-in-right { animation: slideInRight 0.8s ease-out forwards; }
@@ -230,7 +322,8 @@
       .animate-gradient-shift { animation: gradient-shift 3s ease infinite; }
       .animate-text-shadow-pulse { animation: text-shadow-pulse 2s ease-in-out infinite; }
       .animate-border-glow { animation: border-glow 2s ease-in-out infinite; }
-        
+
+      /* Hover Animations */
       .hover-scale { transition: transform 0.3s ease; }
       .hover-scale:hover { transform: scale(1.05); }
 
@@ -243,6 +336,7 @@
       .hover-lift { transition: transform 0.3s ease; }
       .hover-lift:hover { transform: translateY(-5px); }
 
+      /* Scroll-triggered animations */
       .scroll-fade-in { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
       .scroll-fade-in.in-view { opacity: 1; transform: translateY(0); }
 
@@ -255,6 +349,7 @@
       .scroll-zoom { opacity: 0; transform: scale(0.8); transition: all 0.6s ease; }
       .scroll-zoom.in-view { opacity: 1; transform: scale(1); }
 
+      /* Particle effect */
       .particle {
         position: absolute;
         width: 4px;
@@ -264,6 +359,7 @@
         animation: particle-float 3s linear infinite;
       }
 
+      /* Hologram effect */
       .hologram {
         background: linear-gradient(45deg, transparent 30%, rgba(6, 182, 212, 0.1) 50%, transparent 70%);
         background-size: 200% 200%;
@@ -275,6 +371,7 @@
         100% { background-position: 200% 0; }
       }
 
+      /* Loading spinner */
       .cyber-spinner {
         width: 40px;
         height: 40px;
@@ -289,6 +386,7 @@
         100% { transform: rotate(360deg); }
       }
 
+      /* Button ripple effect */
       .ripple {
         position: relative;
         overflow: hidden;
@@ -316,6 +414,8 @@
     </style>
 </head>
 <body class="bg-cyber-dark text-gray-100 font-sans selection:bg-cyber-cyan selection:text-black">
+
+    <!-- Navbar -->
     <nav id="navbar" class="fixed w-full z-40 transition-all duration-300 bg-transparent py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center">
@@ -326,6 +426,8 @@
                     </div>
                     <span>AgusDevSec</span>
                 </a>
+
+                <!-- Desktop Nav -->
                 <div class="hidden md:flex items-center space-x-8 animate-slide-in-down">
                     <a href="#home" class="nav-link text-gray-300 hover:text-cyber-cyan text-sm font-medium transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-cyber-cyan after:left-0 after:-bottom-1 hover:after:w-full after:transition-all hover-lift">Home</a>
                     <a href="#services" class="nav-link text-gray-300 hover:text-cyber-cyan text-sm font-medium transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-cyber-cyan after:left-0 after:-bottom-1 hover:after:w-full after:transition-all hover-lift">Services</a>
@@ -335,6 +437,8 @@
                         <i data-lucide="terminal" class="w-4 h-4 animate-pulse-glow"></i> HIRE ME
                     </a>
                 </div>
+
+                <!-- Mobile Menu Button -->
                 <div class="md:hidden">
                     <button id="mobile-menu-btn" class="text-gray-300 hover:text-white">
                         <i data-lucide="menu"></i>
@@ -342,6 +446,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- Mobile Nav -->
         <div id="mobile-menu" class="hidden md:hidden bg-cyber-slate border-b border-gray-800 absolute w-full backdrop-blur-xl bg-opacity-95">
             <div class="px-4 pt-4 pb-6 space-y-2">
                 <a href="#home" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 hover:border-l-4 hover:border-cyber-cyan transition-all">Home</a>
@@ -354,6 +460,7 @@
     </nav>
 
     <main>
+        <!-- Hero Section -->
         <section id="home" class="min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
             <div class="absolute inset-0 z-0">
                 <div class="absolute inset-0 opacity-20" 
@@ -408,7 +515,16 @@
                         
                         <div class="relative rounded-2xl bg-cyber-slate border border-gray-700 overflow-hidden w-full h-full shadow-2xl z-10">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-20"></div>
-                            <img src="images/image.jpg" alt="AgusDevSec" class="object-cover w-full h-full transition-all duration-500 group-hover:scale-110 group-hover:grayscale-0 grayscale" />
+                            
+                            <!-- Slideshow Container -->
+                            <div class="slideshow-container relative w-full h-full">
+                                <div class="slide active">
+                                    <img src="images/img1.jpg" alt="AgusDevSec" class="object-cover w-full h-full transition-all duration-500 group-hover:scale-110 group-hover:grayscale-0 grayscale" />
+                                </div>
+                                <div class="slide">
+                                    <img src="images/img2.jpg" alt="AgusDevSec" class="object-cover w-full h-full transition-all duration-500 group-hover:scale-110 group-hover:grayscale-0 grayscale" />
+                                </div>
+                            </div>
                             
                             <div class="absolute bottom-6 left-6 right-6 z-30">
                                 <div class="flex justify-between items-end">
@@ -430,6 +546,7 @@
             </a>
         </section>
 
+        <!-- Services Section -->
         <section id="services" class="py-24 px-4 sm:px-6 lg:px-8 bg-cyber-slate/30 relative">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-16 animate-zoom-in">
@@ -485,6 +602,7 @@
             </div>
         </section>
 
+        <!-- Portfolio Section -->
         <section id="projects" class="py-24 px-4 sm:px-6 lg:px-8 bg-cyber-dark relative">
             <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyber-cyan/30 to-transparent"></div>
             
@@ -499,6 +617,7 @@
                         <div class="w-20 h-1 bg-cyber-cyan rounded-full mt-2 mx-auto md:mx-0 animate-gradient-shift"></div>
                     </div>
                     
+                    <!-- Filter Buttons -->
                     <div class="flex space-x-2 mt-6 md:mt-0 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto animate-slide-in-right">
                         <button class="filter-btn active flex items-center px-4 py-2 rounded text-sm font-medium transition-all whitespace-nowrap bg-cyber-cyan text-black shadow-[0_0_10px_rgba(6,182,212,0.5)] hover-scale" data-filter="all">All Projects</button>
                         <button class="filter-btn flex items-center px-4 py-2 rounded text-sm font-medium transition-all whitespace-nowrap bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white hover-scale animate-border-glow" data-filter="web"><i data-lucide="code" class="w-4 h-4 mr-2 animate-float"></i>Web Dev</button>
@@ -559,6 +678,7 @@
             </div>
         </section>
 
+        <!-- Certificates Section -->
         <section id="certificates" class="py-20 px-4 sm:px-6 lg:px-8 bg-cyber-dark relative overflow-hidden">
              <div class="absolute top-1/2 left-0 w-64 h-64 bg-cyber-purple/10 rounded-full blur-3xl -translate-y-1/2 -ml-20 pointer-events-none"></div>
              <div class="absolute top-1/2 right-0 w-64 h-64 bg-cyber-cyan/10 rounded-full blur-3xl -translate-y-1/2 -mr-20 pointer-events-none"></div>
@@ -577,12 +697,15 @@
                     
                     <div class="relative bg-cyber-slate border border-gray-700 rounded-2xl overflow-hidden shadow-2xl">
                         <div class="grid grid-cols-1 md:grid-cols-2">
+                            <!-- Image -->
                             <div class="relative aspect-video md:aspect-auto md:h-[400px] overflow-hidden bg-black/50">
                                 <img id="cert-image" src="" alt="Certificate" class="w-full h-full object-cover animate-fade-in transition-transform duration-700 hover:scale-105" />
                                 <div class="absolute inset-0 bg-gradient-to-t from-cyber-slate via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-cyber-slate"></div>
                                 <div class="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-cyber-cyan"></div>
                                 <div class="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-cyber-cyan"></div>
                             </div>
+
+                            <!-- Content -->
                             <div class="p-8 flex flex-col justify-center relative bg-cyber-slate">
                                 <div class="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] z-0 pointer-events-none bg-[length:100%_2px,3px_100%] opacity-20"></div>
 
@@ -607,6 +730,8 @@
                                         </a>
                                     </div>
                                 </div>
+
+                                <!-- Controls -->
                                 <div class="absolute bottom-6 right-6 flex items-center gap-2 z-20">
                                     <button id="prev-cert" class="p-2 rounded-full bg-gray-800 hover:bg-cyber-cyan hover:text-black text-gray-400 transition-colors border border-gray-700">
                                         <i data-lucide="chevron-left" class="w-4 h-4"></i>
@@ -619,6 +744,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Progress Bar -->
                         <div class="absolute bottom-0 left-0 h-1 bg-cyber-purple/50 w-full">
                             <div id="cert-progress" class="h-full bg-gradient-to-r from-cyber-cyan to-cyber-purple origin-left w-full"></div>
                         </div>
@@ -626,6 +752,8 @@
                 </div>
              </div>
         </section>
+
+        <!-- Contact Section -->
         <section id="contact" class="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-cyber-slate/50 to-cyber-dark relative overflow-hidden">
              <div class="max-w-7xl mx-auto relative z-10">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -688,8 +816,8 @@
                         <form id="contact-form" class="space-y-6">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                 <div class="animate-slide-in-up" style="animation-delay: 0.1s;">
-                                    <label class="block text-xs font-mono text-cyber-cyan mb-2">/ NAME</label>
-                                    <input type="text" name="name" required class="w-full bg-black/40 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-cyan focus:ring-1 focus:ring-cyber-cyan transition-colors" placeholder="example" />
+                                    <label class="block text-xs font-mono text-cyber-cyan mb-2 animate-pulse-glow">/ NAME</label>
+                                    <input type="text" name="name" required class="w-full bg-black/40 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-cyan focus:ring-1 focus:ring-cyber-cyan transition-colors hover-scale animate-border-glow" placeholder="example" />
                                 </div>
                                 <div class="animate-slide-in-up" style="animation-delay: 0.2s;">
                                     <label class="block text-xs font-mono text-cyber-cyan mb-2 animate-pulse-glow">/ EMAIL</label>
@@ -711,12 +839,15 @@
         </section>
     </main>
 
+    <!-- Footer -->
     <footer class="bg-cyber-dark border-t border-gray-800 py-8 px-4 text-center animate-fade-in">
         <p class="text-gray-500 text-sm">
             &copy; 2025 AgusDevSec. All rights reserved. <br/>
             <span class="text-xs text-gray-600 mt-2 block">Thank you for visiting and using our services!</span>
         </p>
     </footer>
+
+    <!-- Chatbot Floating Button & Modal -->
     <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end font-sans animate-bounce-in" style="animation-delay: 1s;">
         <div id="chat-window" class="hidden mb-4 w-[350px] sm:w-[400px] h-[500px] bg-cyber-slate border border-gray-700 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-zoom-in">
              <div class="bg-cyber-dark p-4 border-b border-gray-700 flex justify-between items-center">
@@ -742,6 +873,7 @@
                  </div>
              </div>
              <div class="p-4 bg-cyber-dark border-t border-gray-700">
+                <!-- Quick Action Buttons -->
                 <div class="mb-3 grid grid-cols-2 gap-2">
                     <button onclick="quickAsk('web')" class="text-xs bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg px-3 py-2 transition-colors">🌐 Web Development</button>
                     <button onclick="quickAsk('cyber')" class="text-xs bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg px-3 py-2 transition-colors">🔒 Cyber Security</button>
@@ -768,6 +900,7 @@
             <i data-lucide="message-square" class="w-6 h-6 text-black"></i>
         </button>
     </div>
+
     <script type="module"> 
       
       lucide.createIcons();
@@ -862,6 +995,7 @@
       const progressBar = document.getElementById('cert-progress');
 
       function initCarousel() {
+        // Create indicators
         certificates.forEach((_, idx) => {
             const dot = document.createElement('button');
             dot.className = `w-2 h-2 rounded-full transition-all bg-gray-700`;
@@ -877,6 +1011,7 @@
       function updateCarousel(autoPlay = true) {
         const cert = certificates[certIndex];
         
+        // Reset animation hack
         certImage.classList.remove('animate-fade-in');
         void certImage.offsetWidth;
         certImage.classList.add('animate-fade-in');
@@ -887,6 +1022,7 @@
         certIssuer.textContent = cert.issuer;
         certDate.textContent = cert.date;
 
+        // Update dots
         Array.from(indicatorsContainer.children).forEach((dot, idx) => {
             if (idx === certIndex) {
                 dot.classList.remove('bg-gray-700', 'w-2');
@@ -939,22 +1075,26 @@
         const email = form.email.value;
         const message = form.message.value;
 
+        // Create mailto link with user's email as sender
         const subject = `Message from ${name} - AgusDevSec Website`;
         const body = `Name: ${name}%0AEmail: ${email}%0A%0AMessage:%0A${message.replace(/\n/g, '%0A')}`;
 
         const mailtoLink = `mailto:agustriananda20@yahoo.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
+        // Show confirmation dialog
         const confirmed = confirm(`Anda akan mengirim email dari: ${email}\nKe: agustriananda20@yahoo.com\n\nPastikan email client Anda sudah dikonfigurasi dan izinkan untuk mengirim pesan ini.`);
 
         if (confirmed) {
           const btn = document.getElementById('submit-btn');
           btn.innerHTML = `<span class="animate-pulse">Opening Email Client...</span>`;
 
+          // Open email client
           window.location.href = mailtoLink;
 
           setTimeout(() => {
               btn.innerHTML = `<span>Message Sent</span> <i data-lucide="check" class="ml-2 w-5 h-5"></i>`;
               lucide.createIcons();
+              // Reset form
               form.reset();
               setTimeout(() => {
                   btn.innerHTML = `<span>Init Communication</span> <i data-lucide="send" class="ml-2 w-4 h-4"></i>`;
@@ -975,6 +1115,7 @@
         'hello': 'Hello! Selamat datang. Apa yang bisa saya bantu?',
         'selamat': 'Selamat datang! Ada yang bisa saya bantu?',
 
+        // Services - Web Development
         'web': 'Saya menyediakan jasa pengembangan website modern dengan teknologi terkini seperti React, Next.js, dan Tailwind CSS. Apa jenis website yang Anda butuhkan?',
         'website': 'Saya bisa membantu membuat website profesional untuk bisnis Anda. Mulai dari landing page hingga web aplikasi kompleks.',
         'development': 'Saya fokus pada web development modern dengan teknologi seperti JavaScript, React, Node.js, dan Python.',
@@ -983,6 +1124,7 @@
         'nextjs': 'Next.js adalah framework React favorit saya untuk membuat website dengan performa tinggi dan SEO optimal.',
         'tailwind': 'Saya menggunakan Tailwind CSS untuk styling yang cepat dan konsisten di semua project.',
 
+        // Services - Cyber Security
         'cyber': 'Saya menyediakan layanan keamanan siber termasuk penetration testing, vulnerability assessment, dan konsultasi keamanan.',
         'security': 'Layanan cyber security meliputi: penetration testing, security audit, dan konsultasi keamanan aplikasi web.',
         'pentest': 'Penetration testing untuk mengidentifikasi kerentanan keamanan sebelum hacker menemukannya.',
@@ -990,32 +1132,38 @@
         'audit': 'Security audit komprehensif untuk memastikan aplikasi Anda aman dari berbagai ancaman.',
         'konsultasi': 'Konsultasi keamanan untuk membantu Anda membangun sistem yang lebih aman.',
 
+        // Portfolio/Projects
         'portfolio': 'Lihat section Projects di website ini untuk melihat portfolio lengkap saya. Saya telah mengerjakan berbagai project web development dan cyber security.',
         'project': 'Saya telah menyelesaikan banyak project menarik. Kunjungi section Projects untuk detail lengkapnya.',
         'experience': 'Dengan pengalaman di web development dan cyber security, saya siap membantu project Anda.',
         'case study': 'Lihat case studies di portfolio untuk memahami bagaimana saya menyelesaikan berbagai tantangan project.',
 
+        // Contact
         'kontak': 'Anda bisa menghubungi saya melalui email: agustriananda20@yahoo.com atau melalui WhatsApp di 0857-5644-4803.',
         'email': 'Email saya: agustriananda20@yahoo.com',
         'hubungi': 'Silakan hubungi saya di agustriananda20@yahoo.com atau WhatsApp 0857-5644-4803 untuk diskusi lebih lanjut.',
         'wa': 'Untuk komunikasi cepat, Anda bisa menghubungi melalui WhatsApp atau email.',
         'telepon': 'Untuk diskusi mendalam, silakan hubungi melalui email terlebih dahulu.',
 
+        // Pricing
         'harga': 'Harga layanan tergantung kompleksitas proyek. Mari kita diskusikan kebutuhan spesifik Anda terlebih dahulu.',
         'biaya': 'Biaya akan disesuaikan dengan scope dan kompleksitas pekerjaan. Silakan jelaskan proyek Anda.',
         'budget': 'Budget akan ditentukan berdasarkan requirement dan timeline project. Mari kita bahas detailnya.',
         'estimasi': 'Estimasi biaya akan saya berikan setelah memahami kebutuhan project Anda secara detail.',
 
+        // Consultation
         'consultation': 'Saya menyediakan konsultasi gratis untuk diskusi awal project. Silakan jelaskan kebutuhan Anda.',
         'konsultasi': 'Konsultasi awal gratis untuk memahami kebutuhan dan memberikan solusi terbaik.',
         'meeting': 'Kita bisa melakukan meeting virtual untuk membahas project Anda lebih detail.',
         'diskusi': 'Mari kita diskusikan project Anda. Saya siap membantu menemukan solusi terbaik.',
 
+        // About Me
         'about': 'Saya adalah AgusDevSec, spesialis di web development dan cyber security. Dengan passion di teknologi, saya membantu bisnis berkembang melalui solusi digital yang aman.',
         'tentang': 'Tentang saya: Full-stack developer dengan fokus pada keamanan aplikasi web. Berpengalaman dalam berbagai teknologi modern.',
         'background': 'Background saya di computer science dengan spesialisasi di web development dan cyber security.',
         'skill': 'Skills utama: JavaScript, Python, React, Node.js, Cyber Security, Penetration Testing.',
 
+        // FAQ
         'faq': 'Pertanyaan umum: Berapa lama pengerjaan project? Timeline tergantung kompleksitas, biasanya 2-8 minggu.',
         'pertanyaan': 'Ada pertanyaan lain? Saya siap membantu dengan informasi tentang layanan, pricing, atau project.',
         'timeline': 'Timeline project bervariasi: Landing page (1-2 minggu), Web app kompleks (4-8 minggu), Security audit (1-3 hari).',
@@ -1023,6 +1171,7 @@
         'support': 'Saya menyediakan support maintenance dan update setelah project selesai.',
         'maintenance': 'Layanan maintenance tersedia untuk memastikan website Anda selalu up-to-date dan aman.',
 
+        // Technology specific
         'javascript': 'JavaScript adalah bahasa utama saya untuk web development. Saya ahli dalam ES6+, React, dan Node.js.',
         'python': 'Python saya gunakan untuk backend development, data analysis, dan automation scripts.',
         'php': 'PHP masih saya gunakan untuk legacy systems dan beberapa CMS custom.',
@@ -1030,6 +1179,7 @@
         'api': 'REST API dan GraphQL development untuk integrasi sistem yang robust.',
         'mobile': 'Saya bisa membuat web responsive dan PWA untuk pengalaman mobile yang optimal.',
 
+        // Business specific
         'ecommerce': 'E-commerce website dengan payment gateway integration, inventory management, dan admin dashboard.',
         'cms': 'Custom CMS untuk kemudahan manage konten tanpa coding.',
         'dashboard': 'Admin dashboard untuk monitoring dan management bisnis Anda.',
@@ -1037,6 +1187,7 @@
         'seo': 'SEO optimization untuk meningkatkan visibility website Anda di search engine.',
         'performance': 'Website optimization untuk loading speed dan user experience yang maksimal.',
 
+        // General
         'bantuan': 'Saya bisa membantu dengan web development, cyber security, konsultasi IT, dan pertanyaan umum lainnya.',
         'help': 'Saya siap membantu! Apa yang bisa saya bantu hari ini?',
         'terima kasih': 'Sama-sama! Ada lagi yang bisa saya bantu?',
@@ -1044,9 +1195,11 @@
         'bye': 'Terima kasih sudah berkunjung! Jangan ragu untuk menghubungi saya jika ada kebutuhan.',
         'selamat tinggal': 'Sampai jumpa! Semoga hari Anda menyenangkan.',
 
+        // Default fallback
         'default': 'Terima kasih atas pertanyaan Anda. Untuk informasi lebih detail, silakan hubungi saya di agustriananda20@yahoo.com atau jelaskan lebih spesifik kebutuhan Anda.'
       };
 
+      // Quick ask function
       window.quickAsk = function(topic) {
         const input = document.getElementById('chat-input');
         const questions = {
@@ -1070,15 +1223,18 @@
       function getChatbotResponse(message) {
         const lowerMessage = message.toLowerCase();
 
+        // Check for keywords in the message
         for (const [key, response] of Object.entries(chatbotResponses)) {
           if (key !== 'default' && lowerMessage.includes(key)) {
             return response;
           }
         }
 
+        // Return default response if no keywords match
         return chatbotResponses.default;
       }
 
+      // Expose sendMessage to window for onclick
       window.sendMessage = async function() {
         const input = document.getElementById('chat-input');
         const messagesContainer = document.getElementById('chat-messages');
@@ -1086,6 +1242,7 @@
 
         if (!text) return;
 
+        // User Message
         const userDiv = document.createElement('div');
         userDiv.className = "flex justify-end";
         userDiv.innerHTML = `<div class="max-w-[80%] rounded-lg p-3 text-sm leading-relaxed bg-cyber-cyan text-black rounded-br-none">${text}</div>`;
@@ -1109,13 +1266,18 @@
           botDiv.innerHTML = `<div class="max-w-[80%] rounded-lg p-3 text-sm leading-relaxed bg-gray-800 text-gray-200 rounded-bl-none border border-gray-700">${response}</div>`;
           messagesContainer.appendChild(botDiv);
           messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }, 1000 + Math.random() * 1000); 
+        }, 1000 + Math.random() * 1000);
       }
 
       document.getElementById('chat-input').addEventListener('keypress', (e) => {
         if (e.key === 'Enter') window.sendMessage();
       });
 
+      // ===========================================
+      // ADVANCED ANIMATIONS & INTERACTIONS
+      // ===========================================
+
+      // Intersection Observer for scroll animations
       const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -1128,12 +1290,18 @@
           }
         });
       }, observerOptions);
+
+      // Observe elements for scroll animations
       document.querySelectorAll('.scroll-fade-in, .scroll-slide-left, .scroll-slide-right, .scroll-zoom').forEach(el => {
         observer.observe(el);
       });
+
+      // Add hover animations to buttons
       document.querySelectorAll('button, .filter-btn, a[href]').forEach(btn => {
         btn.classList.add('hover-scale', 'hover-glow');
       });
+
+      // Add floating animation to icons
       document.querySelectorAll('i[data-lucide]').forEach((icon, index) => {
         if (index % 2 === 0) {
           icon.classList.add('animate-float');
@@ -1142,15 +1310,73 @@
         }
         icon.style.animationDelay = `${index * 0.5}s`;
       });
+
+      let currentSlide = 0;
+      const slides = document.querySelectorAll('.slide');
+      const totalSlides = slides.length;
+
+      function resetSlides() {
+        slides.forEach((slide, index) => {
+          slide.classList.remove('leaving-up', 'leaving-down', 'entering-up', 'entering-down');
+          if (index === currentSlide) {
+            slide.style.transform = 'translateY(0) rotate(0deg) scale(1)';
+            slide.style.zIndex = '2';
+            slide.style.opacity = '1';
+          } else {
+            slide.style.transform = 'translateY(-3px) rotate(0.3deg) scale(0.99)';
+            slide.style.zIndex = '1';
+            slide.style.opacity = '0.95';
+          }
+        });
+      }
+
+      function nextSlide() {
+        const current = slides[currentSlide];
+        const nextIndex = (currentSlide + 1) % totalSlides;
+        const next = slides[nextIndex];
+
+        // Determine direction (alternate between up and down)
+        const direction = currentSlide % 2 === 0 ? 'up' : 'down';
+
+        current.classList.add(`leaving-${direction}`);
+
+        setTimeout(() => {
+          next.classList.add(`entering-${direction}`);
+        }, 150);
+
+        setTimeout(() => {
+          currentSlide = nextIndex;
+          resetSlides();
+        }, 2500);
+      }
+
+      function startSlideshow() {
+        resetSlides();
+        setInterval(nextSlide, 10000);
+      }
+
       document.addEventListener('DOMContentLoaded', () => {
         const mobileMenu = document.getElementById('mobile-menu');
-        if (mobileMenu) {
-          const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+
+        if (mobileMenu && mobileBtn) {
           mobileBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
-            mobileMenu.classList.add('animate-slide-in-down');
+            if (!mobileMenu.classList.contains('hidden')) {
+              mobileMenu.classList.add('animate-slide-in-down');
+            }
+          });
+
+          // Close mobile menu when clicking on links
+          const mobileLinks = mobileMenu.querySelectorAll('a');
+          mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+              mobileMenu.classList.add('hidden');
+            });
           });
         }
+
+        startSlideshow();
 
         console.log('✨ Website loaded successfully!');
       });
