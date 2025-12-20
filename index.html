@@ -448,7 +448,7 @@
         </div>
 
         <!-- Mobile Nav -->
-        <div id="mobile-menu" class="hidden md:hidden bg-cyber-slate border-b border-gray-800 absolute w-full backdrop-blur-xl bg-opacity-95">
+        <div id="mobile-menu" class="hidden md:hidden bg-cyber-slate border-b border-gray-800 absolute w-full backdrop-blur-xl bg-opacity-95 z-50">
             <div class="px-4 pt-4 pb-6 space-y-2">
                 <a href="#home" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 hover:border-l-4 hover:border-cyber-cyan transition-all">Home</a>
                 <a href="#services" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 hover:border-l-4 hover:border-cyber-cyan transition-all">Services</a>
@@ -1360,20 +1360,36 @@
         const mobileBtn = document.getElementById('mobile-menu-btn');
 
         if (mobileMenu && mobileBtn) {
-          mobileBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            if (!mobileMenu.classList.contains('hidden')) {
+          const toggleMobileMenu = () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+              mobileMenu.classList.remove('hidden');
               mobileMenu.classList.add('animate-slide-in-down');
+            } else {
+              mobileMenu.classList.add('hidden');
+              mobileMenu.classList.remove('animate-slide-in-down');
             }
-          });
+          };
+
+          mobileBtn.addEventListener('click', toggleMobileMenu);
+          mobileBtn.addEventListener('touchstart', toggleMobileMenu);
 
           // Close mobile menu when clicking on links
           const mobileLinks = mobileMenu.querySelectorAll('a');
           mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
               mobileMenu.classList.add('hidden');
+              mobileMenu.classList.remove('animate-slide-in-down');
+            });
+            link.addEventListener('touchstart', () => {
+              mobileMenu.classList.add('hidden');
+              mobileMenu.classList.remove('animate-slide-in-down');
             });
           });
+
+          console.log('Mobile menu initialized successfully');
+        } else {
+          console.warn('Mobile menu elements not found');
         }
 
         startSlideshow();
