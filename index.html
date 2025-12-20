@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AgusDevSec | Web Dev & Cyber Security</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google GenAI SDK -->
+    <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://esm.run/@google/genai",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.561.0"
+  }
+}
+</script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Config -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            },
+            colors: {
+              cyber: {
+                dark: '#050a14',
+                slate: '#1e293b',
+                cyan: '#06b6d4',
+                green: '#10b981',
+                purple: '#8b5cf6',
+                accent: '#3b82f6'
+              }
+            },
+            animation: {
+              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'glitch': 'glitch 1s linear infinite',
+              'progress': 'progress 5s linear 1',
+            },
+            keyframes: {
+              glitch: {
+                '2%, 64%': { transform: 'translate(2px,0) skew(0deg)' },
+                '4%, 60%': { transform: 'translate(-2px,0) skew(0deg)' },
+                '62%': { transform: 'translate(0,0) skew(5deg)' },
+              },
+              progress: {
+                'from': { transform: 'scaleX(0)' },
+                'to': { transform: 'scaleX(1)' }
+              }
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- Custom CSS -->
+    <style>
+      body {
+        background-color: #050a14;
+        color: #e2e8f0;
+        cursor: crosshair;
+      }
+      
+      /* Scanline Effect */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: repeating-linear-gradient(
+          0deg,
+          rgba(0, 0, 0, 0.15),
+          rgba(0, 0, 0, 0.15) 1px,
+          transparent 1px,
+          transparent 2px
+        );
+        pointer-events: none;
+        z-index: 50;
+        opacity: 0.3;
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #050a14;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #1e293b;
+        border: 1px solid #06b6d4;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #06b6d4;
+      }
+
+      ::selection {
+        background: #06b6d4;
+        color: #000;
+      }
+
+      .animate-fade-in {
+        animation: fadeIn 0.5s ease-out forwards;
+      }
+
+      /* Advanced Animations */
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes slideInLeft {
+        from { opacity: 0; transform: translateX(-50px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+
+      @keyframes slideInRight {
+        from { opacity: 0; transform: translateX(50px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+
+      @keyframes slideInUp {
+        from { opacity: 0; transform: translateY(50px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes slideInDown {
+        from { opacity: 0; transform: translateY(-50px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes bounceIn {
+        0% { opacity: 0; transform: scale(0.3); }
+        50% { opacity: 1; transform: scale(1.05); }
+        70% { transform: scale(0.9); }
+        100% { opacity: 1; transform: scale(1); }
+      }
+
+      @keyframes zoomIn {
+        from { opacity: 0; transform: scale(0.5); }
+        to { opacity: 1; transform: scale(1); }
+      }
+
+      @keyframes rotateIn {
+        from { opacity: 0; transform: rotate(-180deg) scale(0.5); }
+        to { opacity: 1; transform: rotate(0deg) scale(1); }
+      }
+
+      @keyframes flipIn {
+        from { opacity: 0; transform: rotateY(-90deg); }
+        to { opacity: 1; transform: rotateY(0deg); }
+      }
+
+      @keyframes glow {
+        0%, 100% { box-shadow: 0 0 5px rgba(6, 182, 212, 0.5); }
+        50% { box-shadow: 0 0 20px rgba(6, 182, 212, 0.8), 0 0 30px rgba(6, 182, 212, 0.6); }
+      }
+
+      @keyframes pulse-glow {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(6, 182, 212, 0); }
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+      }
+
+      @keyframes float-reverse {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(10px); }
+      }
+
+      @keyframes wiggle {
+        0%, 7% { transform: rotateZ(0); }
+        15% { transform: rotateZ(-15deg); }
+        20% { transform: rotateZ(10deg); }
+        25% { transform: rotateZ(-10deg); }
+        30% { transform: rotateZ(6deg); }
+        35% { transform: rotateZ(-4deg); }
+        40%, 100% { transform: rotateZ(0); }
+      }
+
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+        20%, 40%, 60%, 80% { transform: translateX(5px); }
+      }
+
+      @keyframes heartbeat {
+        0%, 50%, 100% { transform: scale(1); }
+        25%, 75% { transform: scale(1.1); }
+      }
+
+      @keyframes typing {
+        from { width: 0; }
+        to { width: 100%; }
+      }
+
+      @keyframes blink {
+        0%, 50% { border-color: transparent; }
+        51%, 100% { border-color: #06b6d4; }
+      }
+
+      @keyframes gradient-shift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      @keyframes particle-float {
+        0% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+      }
+
+      @keyframes text-shadow-pulse {
+        0%, 100% { text-shadow: 0 0 5px rgba(6, 182, 212, 0.5); }
+        50% { text-shadow: 0 0 20px rgba(6, 182, 212, 0.8), 0 0 30px rgba(6, 182, 212, 0.6); }
+      }
+
+      @keyframes border-glow {
+        0%, 100% { border-color: rgba(6, 182, 212, 0.3); box-shadow: 0 0 0 rgba(6, 182, 212, 0.3); }
+        50% { border-color: rgba(6, 182, 212, 0.8); box-shadow: 0 0 20px rgba(6, 182, 212, 0.6); }
+      }
+
+      /* Utility Classes for Animations */
+      .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
+      .animate-slide-in-left { animation: slideInLeft 0.8s ease-out forwards; }
+      .animate-slide-in-right { animation: slideInRight 0.8s ease-out forwards; }
+      .animate-slide-in-up { animation: slideInUp 0.8s ease-out forwards; }
+      .animate-slide-in-down { animation: slideInDown 0.8s ease-out forwards; }
+      .animate-bounce-in { animation: bounceIn 0.8s ease-out forwards; }
+      .animate-zoom-in { animation: zoomIn 0.8s ease-out forwards; }
+      .animate-rotate-in { animation: rotateIn 0.8s ease-out forwards; }
+      .animate-flip-in { animation: flipIn 0.8s ease-out forwards; }
+      .animate-glow { animation: glow 2s ease-in-out infinite; }
+      .animate-pulse-glow { animation: pulse-glow 2s infinite; }
+      .animate-float { animation: float 3s ease-in-out infinite; }
+      .animate-float-reverse { animation: float-reverse 3s ease-in-out infinite; }
+      .animate-wiggle { animation: wiggle 1s ease-in-out; }
+      .animate-shake { animation: shake 0.5s ease-in-out; }
+      .animate-heartbeat { animation: heartbeat 1.5s ease-in-out infinite; }
+      .animate-typing { animation: typing 3s steps(40, end); }
+      .animate-blink { animation: blink 1s infinite; }
+      .animate-gradient-shift { animation: gradient-shift 3s ease infinite; }
+      .animate-text-shadow-pulse { animation: text-shadow-pulse 2s ease-in-out infinite; }
+      .animate-border-glow { animation: border-glow 2s ease-in-out infinite; }
+
+      /* Hover Animations */
+      .hover-scale { transition: transform 0.3s ease; }
+      .hover-scale:hover { transform: scale(1.05); }
+
+      .hover-rotate { transition: transform 0.3s ease; }
+      .hover-rotate:hover { transform: rotate(5deg); }
+
+      .hover-glow { transition: box-shadow 0.3s ease; }
+      .hover-glow:hover { box-shadow: 0 0 20px rgba(6, 182, 212, 0.6); }
+
+      .hover-lift { transition: transform 0.3s ease; }
+      .hover-lift:hover { transform: translateY(-5px); }
+
+      /* Scroll-triggered animations */
+      .scroll-fade-in { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+      .scroll-fade-in.in-view { opacity: 1; transform: translateY(0); }
+
+      .scroll-slide-left { opacity: 0; transform: translateX(-50px); transition: all 0.6s ease; }
+      .scroll-slide-left.in-view { opacity: 1; transform: translateX(0); }
+
+      .scroll-slide-right { opacity: 0; transform: translateX(50px); transition: all 0.6s ease; }
+      .scroll-slide-right.in-view { opacity: 1; transform: translateX(0); }
+
+      .scroll-zoom { opacity: 0; transform: scale(0.8); transition: all 0.6s ease; }
+      .scroll-zoom.in-view { opacity: 1; transform: scale(1); }
+
+      /* Particle effect */
+      .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: #06b6d4;
+        border-radius: 50%;
+        animation: particle-float 3s linear infinite;
+      }
+
+      /* Hologram effect */
+      .hologram {
+        background: linear-gradient(45deg, transparent 30%, rgba(6, 182, 212, 0.1) 50%, transparent 70%);
+        background-size: 200% 200%;
+        animation: hologram-shimmer 2s linear infinite;
+      }
+
+      @keyframes hologram-shimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+      }
+
+      /* Loading spinner */
+      .cyber-spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid rgba(6, 182, 212, 0.3);
+        border-top: 3px solid #06b6d4;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      /* Button ripple effect */
+      .ripple {
+        position: relative;
+        overflow: hidden;
+      }
+      .ripple::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+      }
+      .ripple:active::before {
+        width: 300px;
+        height: 300px;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+      }
+    </style>
+</head>
+<body class="bg-cyber-dark text-gray-100 font-sans selection:bg-cyber-cyan selection:text-black">
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full z-40 transition-all duration-300 bg-transparent py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <a href="#" class="flex items-center space-x-2 text-white font-bold text-xl tracking-tighter group">
+                    <div class="relative">
+                        <img src="images/icon/logo.png" alt="AgusDevSec Logo" class="w-8 h-8 transition-transform group-hover:scale-110">
+                        <div class="absolute inset-0 bg-cyber-green blur-md opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                    </div>
+                    <span>AgusDevSec</span>
+                </a>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center space-x-8 animate-slide-in-down">
+                    <a href="#home" class="nav-link text-gray-300 hover:text-cyber-cyan text-sm font-medium transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-cyber-cyan after:left-0 after:-bottom-1 hover:after:w-full after:transition-all hover-lift">Home</a>
+                    <a href="#services" class="nav-link text-gray-300 hover:text-cyber-cyan text-sm font-medium transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-cyber-cyan after:left-0 after:-bottom-1 hover:after:w-full after:transition-all hover-lift">Services</a>
+                    <a href="#projects" class="nav-link text-gray-300 hover:text-cyber-cyan text-sm font-medium transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-cyber-cyan after:left-0 after:-bottom-1 hover:after:w-full after:transition-all hover-lift">Projects</a>
+                    <a href="#certificates" class="nav-link text-gray-300 hover:text-cyber-cyan text-sm font-medium transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-cyber-cyan after:left-0 after:-bottom-1 hover:after:w-full after:transition-all hover-lift">Awards</a>
+                    <a href="#contact" class="px-5 py-2 text-sm font-bold bg-transparent border border-cyber-cyan text-cyber-cyan rounded hover:bg-cyber-cyan hover:text-black transition-all shadow-[0_0_10px_rgba(6,182,212,0.2)] hover:shadow-[0_0_20px_rgba(6,182,212,0.6)] flex items-center gap-2 hover-scale">
+                        <i data-lucide="terminal" class="w-4 h-4 animate-pulse-glow"></i> HIRE ME
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white">
+                        <i data-lucide="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Nav -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cyber-slate border-b border-gray-800 absolute w-full backdrop-blur-xl bg-opacity-95">
+            <div class="px-4 pt-4 pb-6 space-y-2">
+                <a href="#home" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 hover:border-l-4 hover:border-cyber-cyan transition-all">Home</a>
+                <a href="#services" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 hover:border-l-4 hover:border-cyber-cyan transition-all">Services</a>
+                <a href="#projects" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 hover:border-l-4 hover:border-cyber-cyan transition-all">Projects</a>
+                <a href="#certificates" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 hover:border-l-4 hover:border-cyber-cyan transition-all">Awards</a>
+                <a href="#contact" class="block px-3 py-3 rounded-md text-base font-bold text-cyber-cyan hover:bg-cyber-cyan/10 border border-cyber-cyan/30 mt-4 text-center">HIRE ME</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <div class="absolute inset-0 opacity-20" 
+                    style="background-image: linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px); background-size: 30px 30px; mask-image: radial-gradient(circle at center, black, transparent 80%);">
+                </div>
+            </div>
+
+            <div class="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center z-10">
+                <div class="space-y-8 animate-slide-in-left">
+                    <div class="inline-flex items-center px-4 py-2 rounded-full border border-cyber-green/30 bg-cyber-green/5 text-cyber-green text-xs font-mono tracking-wider uppercase animate-bounce-in hover-scale">
+                        <span class="w-2 h-2 rounded-full bg-cyber-green animate-pulse mr-2 shadow-[0_0_10px_#10b981] animate-glow"></span>
+                        System Online & Ready
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white leading-tight animate-zoom-in">
+                        Halo, Saya <br />
+                        <span class="relative inline-block group">
+                            <span class="absolute -inset-1 bg-gradient-to-r from-cyber-cyan to-cyber-green blur opacity-30 group-hover:opacity-70 transition duration-500"></span>
+                            <span class="relative text-transparent bg-clip-text bg-gradient-to-r from-cyber-cyan to-cyber-green group-hover:animate-glitch block">
+                                Agus Tri Ananda
+                            </span>
+                        </span>
+                    </h1>
+                    
+                    <div class="h-8">
+                        <p class="text-xl sm:text-2xl text-gray-300 font-mono animate-typing">
+                            I am a <span id="typewriter" class="text-cyber-cyan border-r-2 border-cyber-cyan pr-1 animate-blink"></span>
+                        </p>
+                    </div>
+
+                    <p class="text-gray-400 max-w-lg leading-relaxed text-lg animate-fade-in">
+                        Membangun arsitektur digital yang presisi dan mengamankannya dari ancaman tak terlihat. Solusi end-to-end untuk kebutuhan web dan keamanan Anda.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 pt-4 animate-slide-in-up">
+                        <a href="#contact" class="group relative px-8 py-3 bg-cyber-cyan text-black font-bold rounded overflow-hidden hover-scale">
+                            <div class="absolute inset-0 w-full h-full bg-white/20 transform -translate-x-full skew-x-12 group-hover:animate-[shimmer_1s_infinite]"></div>
+                            <span class="relative flex items-center">
+                                Mulai Proyek <i data-lucide="arrow-right" class="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform animate-float"></i>
+                            </span>
+                        </a>
+                        <a href="#projects" class="px-8 py-3 border border-gray-600 text-gray-300 font-medium rounded hover:border-cyber-green hover:text-cyber-green transition-all bg-transparent hover:bg-cyber-green/5 hover-scale animate-border-glow">
+                            Lihat Karya
+                        </a>
+                    </div>
+                </div>
+
+                <div class="relative flex justify-center lg:justify-end group perspective-1000 animate-slide-in-right">
+                    <div class="relative w-full max-w-md aspect-square transform transition-transform duration-700 group-hover:rotate-y-12 group-hover:rotate-x-6 animate-float-reverse">
+                        <div class="absolute -inset-2 border-2 border-cyber-cyan/30 rounded-2xl z-0 animate-border-glow"></div>
+                        <div class="absolute -inset-2 border-2 border-cyber-green/30 rounded-2xl z-0 transform rotate-3"></div>
+                        
+                        <div class="relative rounded-2xl bg-cyber-slate border border-gray-700 overflow-hidden w-full h-full shadow-2xl z-10">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-20"></div>
+                            <img src="images/image.jpg" alt="AgusDevSec" class="object-cover w-full h-full transition-all duration-500 group-hover:scale-110 group-hover:grayscale-0 grayscale" />
+                            
+                            <div class="absolute bottom-6 left-6 right-6 z-30">
+                                <div class="flex justify-between items-end">
+                                    <div>
+                                        <div class="text-cyber-cyan font-mono text-xs mb-1">ID: 0x93FA</div>
+                                        <div class="text-white font-bold text-lg animate-text-shadow-pulse">Cyber Security Expert</div>
+                                    </div>
+                                    <i data-lucide="shield" class="text-cyber-green w-8 h-8 animate-pulse-slow animate-glow"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#services" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-gray-500 hover:text-cyber-cyan transition-colors animate-bounce hover-scale">
+                <span class="text-xs font-mono mb-2">SCROLL</span>
+                <i data-lucide="chevron-down" class="w-5 h-5"></i>
+            </a>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-24 px-4 sm:px-6 lg:px-8 bg-cyber-slate/30 relative">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16 animate-zoom-in">
+                    <h2 class="text-3xl font-bold text-white sm:text-4xl mb-4">Layanan & Keahlian</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-transparent via-cyber-green to-transparent mx-auto rounded-full animate-gradient-shift"></div>
+                    <p class="mt-4 text-gray-400 max-w-2xl mx-auto animate-fade-in">
+                        Kombinasi skill programming dan hacking untuk solusi digital yang tidak hanya indah, tapi juga tangguh.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="relative group animate-fade-in" style="animation-delay: 0.1s;">
+                        <div class="absolute -inset-0.5 bg-gradient-to-r from-cyber-cyan to-cyber-green rounded-xl blur opacity-0 group-hover:opacity-60 transition duration-500 animate-pulse-glow"></div>
+                        <div class="relative h-full bg-cyber-dark p-6 rounded-xl border border-gray-800 group-hover:border-transparent transition-all duration-300 flex flex-col hover-lift">
+                            <div class="w-14 h-14 bg-gray-900 rounded-lg flex items-center justify-center mb-6 group-hover:bg-gray-800 transition-colors border border-gray-700 group-hover:border-cyber-cyan/50">
+                                <i data-lucide="code" class="text-cyber-cyan w-7 h-7"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-3 group-hover:text-cyber-cyan transition-colors">Secure Web Dev</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed flex-1">Pembuatan website modern (React/Next.js) dengan penerapan best practice keamanan sejak baris kode pertama.</p>
+                        </div>
+                    </div>
+                    <div class="relative group animate-fade-in" style="animation-delay: 0.2s;">
+                         <div class="absolute -inset-0.5 bg-gradient-to-r from-cyber-cyan to-cyber-green rounded-xl blur opacity-0 group-hover:opacity-60 transition duration-500 animate-pulse-glow"></div>
+                        <div class="relative h-full bg-cyber-dark p-6 rounded-xl border border-gray-800 group-hover:border-transparent transition-all duration-300 flex flex-col hover-lift">
+                            <div class="w-14 h-14 bg-gray-900 rounded-lg flex items-center justify-center mb-6 group-hover:bg-gray-800 transition-colors border border-gray-700 group-hover:border-cyber-cyan/50 animate-float-reverse">
+                                <i data-lucide="search" class="text-cyber-green w-7 h-7 animate-pulse-glow"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-3 group-hover:text-cyber-cyan transition-colors">Vulnerability Assessment</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed flex-1">Analisis menyeluruh untuk menemukan celah keamanan pada aplikasi web atau jaringan Anda.</p>
+                        </div>
+                    </div>
+                    <div class="relative group animate-fade-in" style="animation-delay: 0.3s;">
+                         <div class="absolute -inset-0.5 bg-gradient-to-r from-cyber-cyan to-cyber-green rounded-xl blur opacity-0 group-hover:opacity-60 transition duration-500 animate-pulse-glow"></div>
+                        <div class="relative h-full bg-cyber-dark p-6 rounded-xl border border-gray-800 group-hover:border-transparent transition-all duration-300 flex flex-col hover-lift">
+                            <div class="w-14 h-14 bg-gray-900 rounded-lg flex items-center justify-center mb-6 group-hover:bg-gray-800 transition-colors border border-gray-700 group-hover:border-cyber-cyan/50 animate-float">
+                                <i data-lucide="shield" class="text-blue-500 w-7 h-7 animate-pulse-glow"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-3 group-hover:text-cyber-cyan transition-colors">Penetration Testing</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed flex-1">Simulasi serangan siber etis untuk menguji ketahanan sistem pertahanan digital perusahaan Anda.</p>
+                        </div>
+                    </div>
+                    <div class="relative group animate-fade-in" style="animation-delay: 0.4s;">
+                         <div class="absolute -inset-0.5 bg-gradient-to-r from-cyber-cyan to-cyber-green rounded-xl blur opacity-0 group-hover:opacity-60 transition duration-500 animate-pulse-glow"></div>
+                        <div class="relative h-full bg-cyber-dark p-6 rounded-xl border border-gray-800 group-hover:border-transparent transition-all duration-300 flex flex-col hover-lift">
+                            <div class="w-14 h-14 bg-gray-900 rounded-lg flex items-center justify-center mb-6 group-hover:bg-gray-800 transition-colors border border-gray-700 group-hover:border-cyber-cyan/50 animate-float-reverse">
+                                <i data-lucide="lock" class="text-purple-500 w-7 h-7 animate-pulse-glow"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-3 group-hover:text-cyber-cyan transition-colors">Security Consulting</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed flex-1">Konsultasi strategi keamanan, hardening server, dan edukasi awareness keamanan untuk tim.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="projects" class="py-24 px-4 sm:px-6 lg:px-8 bg-cyber-dark relative">
+            <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyber-cyan/30 to-transparent"></div>
+            
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-center md:justify-between items-center md:items-end mb-12 animate-slide-in-up">
+                    <div class="text-center md:text-left">
+                        <h2 class="text-3xl font-bold text-white sm:text-4xl mb-2 flex items-center justify-center md:justify-start">
+                            <span class="text-cyber-cyan mr-2 animate-pulse-glow">&lt;</span>
+                            Proyek Saya
+                            <span class="text-cyber-cyan ml-2 animate-pulse-glow">/&gt;</span>
+                        </h2>
+                        <div class="w-20 h-1 bg-cyber-cyan rounded-full mt-2 mx-auto md:mx-0 animate-gradient-shift"></div>
+                    </div>
+                    
+                    <!-- Filter Buttons -->
+                    <div class="flex space-x-2 mt-6 md:mt-0 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto animate-slide-in-right">
+                        <button class="filter-btn active flex items-center px-4 py-2 rounded text-sm font-medium transition-all whitespace-nowrap bg-cyber-cyan text-black shadow-[0_0_10px_rgba(6,182,212,0.5)] hover-scale" data-filter="all">All Projects</button>
+                        <button class="filter-btn flex items-center px-4 py-2 rounded text-sm font-medium transition-all whitespace-nowrap bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white hover-scale animate-border-glow" data-filter="web"><i data-lucide="code" class="w-4 h-4 mr-2 animate-float"></i>Web Dev</button>
+                        <button class="filter-btn flex items-center px-4 py-2 rounded text-sm font-medium transition-all whitespace-nowrap bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white hover-scale animate-border-glow" data-filter="security"><i data-lucide="lock" class="w-4 h-4 mr-2 animate-float-reverse"></i>Security</button>
+                        <button class="filter-btn flex items-center px-4 py-2 rounded text-sm font-medium transition-all whitespace-nowrap bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white hover-scale animate-border-glow" data-filter="network"><i data-lucide="server" class="w-4 h-4 mr-2 animate-float"></i>Network</button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+                    <div class="project-card group relative bg-cyber-slate rounded-lg overflow-hidden border border-gray-800 hover:border-cyber-cyan transition-all duration-300 hover:shadow-[0_0_20px_rgba(6,182,212,0.15)] hover:-translate-y-2 flex flex-col h-full" data-category="web">
+                        <div class="relative aspect-video overflow-hidden">
+                            <img src="images/documentation/dw1.png" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-cyber-slate via-transparent to-transparent opacity-80"></div>
+                            <div class="absolute top-4 right-4 px-3 py-1 bg-black/60 backdrop-blur border border-gray-600 rounded text-xs font-mono text-cyber-cyan uppercase">WEB</div>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyber-cyan transition-colors">Aplikasi kasir Bugis Pada'Idi</h3>
+                            <p class="text-gray-400 text-sm mb-4 line-clamp-3">Aplikasi kasir dengan fitur transaksi cepat dan laporan penjualan.</p>
+                            <div class="flex flex-wrap gap-2 mt-auto">
+                                <span class="px-2 py-1 bg-cyber-dark text-xs text-gray-300 rounded border border-gray-700 font-mono">#DW</span>
+                                <span class="px-2 py-1 bg-cyber-dark text-xs text-gray-300 rounded border border-gray-700 font-mono">#POS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card group relative bg-cyber-slate/60 rounded-lg overflow-hidden border border-dashed border-gray-700 transition-all duration-300 flex flex-col h-full opacity-90" data-category="security">
+                        <div class="relative aspect-video overflow-hidden flex items-center justify-center bg-black/40">
+                            <div class="text-center">
+                                <i data-lucide="x-circle" class="w-16 h-16 text-red-500 mx-auto"></i>
+                                <div class="text-xs text-gray-400 mt-2">Belum Ada Konten</div>
+                            </div>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyber-cyan transition-colors">Kosong</h3>
+                            <p class="text-gray-500 text-sm mb-4 line-clamp-3">Proyek ini belum ditambahkan. Klik untuk mengisi nanti.</p>
+                            <div class="flex flex-wrap gap-2 mt-auto">
+                                <span class="px-2 py-1 bg-cyber-dark text-xs text-gray-400 rounded border border-gray-700 font-mono">#DS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card group relative bg-cyber-slate/60 rounded-lg overflow-hidden border border-dashed border-gray-700 transition-all duration-300 flex flex-col h-full opacity-90" data-category="network">
+                        <div class="relative aspect-video overflow-hidden flex items-center justify-center bg-black/40">
+                            <div class="text-center">
+                                <i data-lucide="alert-octagon" class="w-16 h-16 text-red-500 mx-auto"></i>
+                                <div class="text-xs text-gray-400 mt-2">Belum Ada Konten</div>
+                            </div>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyber-cyan transition-colors">Kosong</h3>
+                            <p class="text-gray-500 text-sm mb-4 line-clamp-3">Proyek ini belum ditambahkan. Klik untuk mengisi nanti.</p>
+                            <div class="flex flex-wrap gap-2 mt-auto">
+                                <span class="px-2 py-1 bg-cyber-dark text-xs text-gray-400 rounded border border-gray-700 font-mono">#DN</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certificates Section -->
+        <section id="certificates" class="py-20 px-4 sm:px-6 lg:px-8 bg-cyber-dark relative overflow-hidden">
+             <div class="absolute top-1/2 left-0 w-64 h-64 bg-cyber-purple/10 rounded-full blur-3xl -translate-y-1/2 -ml-20 pointer-events-none"></div>
+             <div class="absolute top-1/2 right-0 w-64 h-64 bg-cyber-cyan/10 rounded-full blur-3xl -translate-y-1/2 -mr-20 pointer-events-none"></div>
+
+             <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-white sm:text-4xl mb-4 flex items-center justify-center gap-3">
+                        <i data-lucide="award" class="text-cyber-purple w-8 h-8"></i>
+                        Sertifikasi & Penghargaan
+                    </h2>
+                    <p class="text-gray-400">Pengakuan profesional atas keahlian dan dedikasi.</p>
+                </div>
+
+                <div class="relative max-w-3xl mx-auto group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-cyber-cyan via-cyber-purple to-cyber-green rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-1000"></div>
+                    
+                    <div class="relative bg-cyber-slate border border-gray-700 rounded-2xl overflow-hidden shadow-2xl">
+                        <div class="grid grid-cols-1 md:grid-cols-2">
+                            <!-- Image -->
+                            <div class="relative aspect-video md:aspect-auto md:h-[400px] overflow-hidden bg-black/50">
+                                <img id="cert-image" src="" alt="Certificate" class="w-full h-full object-cover animate-fade-in transition-transform duration-700 hover:scale-105" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-cyber-slate via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-cyber-slate"></div>
+                                <div class="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-cyber-cyan"></div>
+                                <div class="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-cyber-cyan"></div>
+                            </div>
+
+                            <!-- Content -->
+                            <div class="p-8 flex flex-col justify-center relative bg-cyber-slate">
+                                <div class="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] z-0 pointer-events-none bg-[length:100%_2px,3px_100%] opacity-20"></div>
+
+                                <div class="relative z-10">
+                                    <div id="cert-id" class="inline-block px-3 py-1 mb-4 text-xs font-mono text-cyber-purple border border-cyber-purple/30 rounded bg-cyber-purple/10">ID: 0001</div>
+                                    <h3 id="cert-title" class="text-2xl font-bold text-white mb-2 leading-tight">Certificate Title</h3>
+                                    
+                                    <div class="space-y-2 mb-6 text-gray-400 font-mono text-sm">
+                                        <div class="flex items-center gap-2">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-cyber-green"></span>
+                                            Issuer: <span id="cert-issuer" class="text-gray-300">Issuer Name</span>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-cyber-cyan"></span>
+                                            Date: <span id="cert-date" class="text-gray-300">2023</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center gap-4">
+                                        <a href="#" class="inline-flex items-center px-5 py-2.5 bg-cyber-dark border border-gray-600 rounded text-sm font-medium text-white hover:border-cyber-cyan hover:text-cyber-cyan transition-all group/btn">
+                                            Verify Credential <i data-lucide="external-link" class="ml-2 w-4 h-4"></i>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Controls -->
+                                <div class="absolute bottom-6 right-6 flex items-center gap-2 z-20">
+                                    <button id="prev-cert" class="p-2 rounded-full bg-gray-800 hover:bg-cyber-cyan hover:text-black text-gray-400 transition-colors border border-gray-700">
+                                        <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                                    </button>
+                                    <div class="flex gap-1.5" id="cert-indicators">
+                                        <!-- Dots generated by JS -->
+                                    </div>
+                                    <button id="next-cert" class="p-2 rounded-full bg-gray-800 hover:bg-cyber-cyan hover:text-black text-gray-400 transition-colors border border-gray-700">
+                                        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Progress Bar -->
+                        <div class="absolute bottom-0 left-0 h-1 bg-cyber-purple/50 w-full">
+                            <div id="cert-progress" class="h-full bg-gradient-to-r from-cyber-cyan to-cyber-purple origin-left w-full"></div>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-cyber-slate/50 to-cyber-dark relative overflow-hidden">
+             <div class="max-w-7xl mx-auto relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div class="animate-slide-in-left">
+                        <h2 class="text-4xl font-bold text-white mb-6">Let's Secure Your Future</h2>
+                        <p class="text-gray-400 mb-8 leading-relaxed text-lg animate-fade-in">
+                            Tertarik untuk berkolaborasi dalam proyek web development atau membutuhkan audit keamanan?
+                        </p>
+                        
+                        <div class="space-y-6">
+                            <div class="group flex items-center p-4 bg-cyber-slate/50 rounded-xl border border-gray-800 hover:border-cyber-cyan/50 transition-all cursor-pointer hover-lift animate-fade-in" onclick="copyEmail()" style="animation-delay: 0.1s;">
+                                <div class="flex-shrink-0 bg-gray-900 p-3 rounded-lg animate-float">
+                                    <i data-lucide="mail" class="w-6 h-6 text-cyber-cyan animate-pulse-glow"></i>
+                                </div>
+                                <div class="ml-4 flex-1">
+                                    <h3 class="text-white font-medium text-sm">Email Address</h3>
+                                    <p class="text-gray-400 font-mono text-sm" id="contact-email">agustriananda20@yahoo.com</p>
+                                </div>
+                                <div class="mr-2">
+                                     <i id="copy-icon" data-lucide="copy" class="w-5 h-5 text-gray-500 group-hover:text-white animate-wiggle"></i>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center p-4 bg-cyber-slate/50 rounded-xl border border-gray-800 hover:border-cyber-green/50 transition-all cursor-pointer hover-lift animate-fade-in" onclick="window.open('https://wa.me/6285756444803', '_blank')" style="animation-delay: 0.2s;">
+                                <div class="flex-shrink-0 bg-gray-900 p-3 rounded-lg animate-float-reverse">
+                                    <i data-lucide="phone" class="w-6 h-6 text-cyber-green animate-pulse-glow"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h3 class="text-white font-medium text-sm">WhatsApp</h3>
+                                    <p class="text-gray-400 font-mono text-sm">0857-5644-4803</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center p-4 bg-cyber-slate/50 rounded-xl border border-gray-800 hover:border-pink-500/50 transition-all cursor-pointer hover-lift animate-fade-in" onclick="window.open('https://instagram.com/agstriananda', '_blank')" style="animation-delay: 0.3s;">
+                                <div class="flex-shrink-0 bg-gray-900 p-3 rounded-lg animate-float">
+                                    <i data-lucide="instagram" class="w-6 h-6 text-pink-500 animate-pulse-glow"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h3 class="text-white font-medium text-sm">Instagram</h3>
+                                    <p class="text-gray-400 font-mono text-sm">@agstriananda</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center p-4 bg-cyber-slate/50 rounded-xl border border-gray-800 hover:border-gray-300/50 transition-all cursor-pointer hover-lift animate-fade-in" onclick="window.open('https://github.com/AgusDevSec', '_blank')" style="animation-delay: 0.4s;">
+                                <div class="flex-shrink-0 bg-gray-900 p-3 rounded-lg animate-float-reverse">
+                                    <i data-lucide="github" class="w-6 h-6 text-gray-300 animate-pulse-glow"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h3 class="text-white font-medium text-sm">GitHub</h3>
+                                    <p class="text-gray-400 font-mono text-sm">AgusDevSec</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-cyber-slate/80 backdrop-blur-sm p-8 rounded-2xl border border-gray-700 shadow-2xl relative animate-slide-in-right">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyber-cyan to-cyber-green rounded-t-2xl"></div>
+                        <h3 class="text-2xl font-bold text-white mb-6">Send Message</h3>
+                        
+                        <form id="contact-form" class="space-y-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div class="animate-slide-in-up" style="animation-delay: 0.1s;">
+                                    <label class="block text-xs font-mono text-cyber-cyan mb-2">/ NAME</label>
+                                    <input type="text" name="name" required class="w-full bg-black/40 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-cyan focus:ring-1 focus:ring-cyber-cyan transition-colors" placeholder="John Doe" />
+                                </div>
+                                <div class="animate-slide-in-up" style="animation-delay: 0.2s;">
+                                    <label class="block text-xs font-mono text-cyber-cyan mb-2 animate-pulse-glow">/ EMAIL</label>
+                                    <input type="email" name="email" required class="w-full bg-black/40 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-cyan focus:ring-1 focus:ring-cyber-cyan transition-colors hover-scale animate-border-glow" placeholder="john@example.com" />
+                                </div>
+                            </div>
+                            <div class="animate-slide-in-up" style="animation-delay: 0.3s;">
+                                <label class="block text-xs font-mono text-cyber-cyan mb-2 animate-pulse-glow">/ MESSAGE</label>
+                                <textarea rows="4" name="message" required class="w-full bg-black/40 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-cyan focus:ring-1 focus:ring-cyber-cyan transition-colors hover-scale animate-border-glow" placeholder="System breach detected... just kidding. Hello!"></textarea>
+                            </div>
+                            
+                            <button type="submit" id="submit-btn" class="w-full flex justify-center items-center py-4 px-4 bg-cyber-cyan text-black rounded-lg shadow-sm text-sm font-bold tracking-wider uppercase transition-all duration-300 hover:bg-cyan-400 hover-scale animate-slide-in-up" style="animation-delay: 0.4s;">
+                                <span>Init Communication</span> <i data-lucide="send" class="ml-2 w-4 h-4 animate-float"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+             </div>
+        </section>
+    </main>
+
+    <footer class="bg-cyber-dark border-t border-gray-800 py-8 px-4 text-center animate-fade-in">
+        <p class="text-gray-500 text-sm">
+            &copy; 2025 AgusDevSec. All rights reserved. <br/>
+            <span class="text-xs text-gray-600 mt-2 block">Thank you for visiting and using our services!</span>
+        </p>
+    </footer>
+
+    <!-- Chatbot Floating Button & Modal -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end font-sans animate-bounce-in" style="animation-delay: 1s;">
+        <div id="chat-window" class="hidden mb-4 w-[350px] sm:w-[400px] h-[500px] bg-cyber-slate border border-gray-700 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-zoom-in">
+             <div class="bg-cyber-dark p-4 border-b border-gray-700 flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-full bg-cyber-green/20 flex items-center justify-center border border-cyber-green/50">
+                        <i data-lucide="bot" class="w-5 h-5 text-cyber-green"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-white font-medium text-sm">ChatBot</h3>
+                        <span class="text-xs text-cyber-cyan flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-cyber-cyan animate-pulse"></span>
+                            Online
+                        </span>
+                    </div>
+                </div>
+                <button onclick="toggleChat()" class="text-gray-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+             </div>
+             <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4 bg-cyber-slate/50">
+                 <div class="flex justify-start">
+                     <div class="max-w-[80%] rounded-lg p-3 text-sm leading-relaxed bg-gray-800 text-gray-200 rounded-bl-none border border-gray-700">
+                         Halo! Selamat datang di website AgusDevSec. Saya adalah ChatBot yang siap membantu Anda dengan berbagai kebutuhan. Ada yang bisa saya bantu?
+                     </div>
+                 </div>
+             </div>
+             <div class="p-4 bg-cyber-dark border-t border-gray-700">
+                <!-- Quick Action Buttons -->
+                <div class="mb-3 grid grid-cols-2 gap-2">
+                    <button onclick="quickAsk('web')" class="text-xs bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg px-3 py-2 transition-colors">🌐 Web Development</button>
+                    <button onclick="quickAsk('cyber')" class="text-xs bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg px-3 py-2 transition-colors">🔒 Cyber Security</button>
+                    <button onclick="quickAsk('portfolio')" class="text-xs bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg px-3 py-2 transition-colors">💼 Portfolio</button>
+                    <button onclick="quickAsk('contact')" class="text-xs bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg px-3 py-2 transition-colors">📧 Contact</button>
+                    <button onclick="quickAsk('pricing')" class="text-xs bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg px-3 py-2 transition-colors">💰 Pricing</button>
+                    <button onclick="quickAsk('consultation')" class="text-xs bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg px-3 py-2 transition-colors">💬 Consultation</button>
+                    <button onclick="quickAsk('about')" class="text-xs bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg px-3 py-2 transition-colors">👨‍💻 About Me</button>
+                    <button onclick="quickAsk('faq')" class="text-xs bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg px-3 py-2 transition-colors">❓ FAQ</button>
+                    <button onclick="quickAsk('ecommerce')" class="text-xs bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg px-3 py-2 transition-colors">🛒 E-commerce</button>
+                    <button onclick="quickAsk('seo')" class="text-xs bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg px-3 py-2 transition-colors">🔍 SEO</button>
+                    <button onclick="quickAsk('mobile')" class="text-xs bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg px-3 py-2 transition-colors">📱 Mobile App</button>
+                    <button onclick="quickAsk('timeline')" class="text-xs bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg px-3 py-2 transition-colors">⏰ Timeline</button>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <input id="chat-input" type="text" placeholder="Tanya apa saja tentang layanan kami..." class="flex-1 bg-cyber-slate text-white text-sm rounded-lg px-4 py-2 border border-gray-600 focus:outline-none focus:border-cyber-cyan transition-colors" />
+                    <button onclick="sendMessage()" class="p-2 bg-cyber-cyan text-black rounded-lg hover:bg-cyan-400">
+                        <i data-lucide="send" class="w-4 h-4"></i>
+                    </button>
+                </div>
+             </div>
+        </div>
+        <button onclick="toggleChat()" class="w-14 h-14 bg-cyber-cyan hover:bg-cyan-400 rounded-full shadow-[0_0_20px_rgba(6,182,212,0.4)] flex items-center justify-center transition-all duration-300 transform hover:scale-105">
+            <i data-lucide="message-square" class="w-6 h-6 text-black"></i>
+        </button>
+    </div>
+
+    <!-- MAIN LOGIC SCRIPT -->
+    <script type="module"> 
+      
+      lucide.createIcons();
+
+      const navbar = document.getElementById('navbar');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 20) {
+            navbar.classList.add('bg-cyber-dark/90', 'backdrop-blur-md', 'border-b', 'border-gray-800', 'py-3');
+            navbar.classList.remove('bg-transparent', 'py-6');
+        } else {
+            navbar.classList.add('bg-transparent', 'py-6');
+            navbar.classList.remove('bg-cyber-dark/90', 'backdrop-blur-md', 'border-b', 'border-gray-800', 'py-3');
+        }
+      });
+
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+
+      const roles = ["Web Developer", "Ethical Hacker", "Security Enthusiast", "Bug Hunter"];
+      const typeElement = document.getElementById('typewriter');
+      let roleIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+
+      function typeWriter() {
+        const currentRole = roles[roleIndex];
+        
+        if (isDeleting) {
+            typeElement.textContent = currentRole.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            typeElement.textContent = currentRole.substring(0, charIndex + 1);
+            charIndex++;
+        }
+
+        let typeSpeed = isDeleting ? 50 : 100;
+
+        if (!isDeleting && charIndex === currentRole.length) {
+            isDeleting = true;
+            typeSpeed = 2000; // Pause at end
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            roleIndex = (roleIndex + 1) % roles.length;
+            typeSpeed = 500;
+        }
+
+        setTimeout(typeWriter, typeSpeed);
+      }
+      typeWriter();
+
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const projects = document.querySelectorAll('.project-card');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Active state
+            filterBtns.forEach(b => {
+                b.classList.remove('bg-cyber-cyan', 'text-black', 'shadow-[0_0_10px_rgba(6,182,212,0.5)]');
+                b.classList.add('bg-gray-800', 'text-gray-400');
+            });
+            btn.classList.remove('bg-gray-800', 'text-gray-400');
+            btn.classList.add('bg-cyber-cyan', 'text-black', 'shadow-[0_0_10px_rgba(6,182,212,0.5)]');
+
+            // Filtering
+            const filter = btn.getAttribute('data-filter');
+            projects.forEach(project => {
+                if (filter === 'all' || project.getAttribute('data-category') === filter) {
+                    project.style.display = 'flex';
+                } else {
+                    project.style.display = 'none';
+                }
+            });
+        });
+      });
+
+      const certificates = [
+                { id: 1, title: "Completed Training Program Red Team & Operational Security", issuer: "Dark Vortex", date: "1 March 2021", image: "images/certificate/c1.png" },
+                { id: 2, title: "Penghargaan dari Badan Siber dan Sandi Negara", issuer: "BSSN", date: "19 February 2019", image: "images/certificate/c2.png" }
+            ];
+      
+      let certIndex = 0;
+      let certInterval;
+      
+      const certImage = document.getElementById('cert-image');
+      const certTitle = document.getElementById('cert-title');
+      const certId = document.getElementById('cert-id');
+      const certIssuer = document.getElementById('cert-issuer');
+      const certDate = document.getElementById('cert-date');
+      const indicatorsContainer = document.getElementById('cert-indicators');
+      const progressBar = document.getElementById('cert-progress');
+
+      function initCarousel() {
+        // Create indicators
+        certificates.forEach((_, idx) => {
+            const dot = document.createElement('button');
+            dot.className = `w-2 h-2 rounded-full transition-all bg-gray-700`;
+            dot.onclick = () => {
+                certIndex = idx;
+                updateCarousel(false);
+            };
+            indicatorsContainer.appendChild(dot);
+        });
+        updateCarousel(true);
+      }
+
+      function updateCarousel(autoPlay = true) {
+        const cert = certificates[certIndex];
+        
+        // Reset animation hack
+        certImage.classList.remove('animate-fade-in');
+        void certImage.offsetWidth;
+        certImage.classList.add('animate-fade-in');
+
+        certImage.src = cert.image;
+        certTitle.textContent = cert.title;
+        certId.textContent = `ID: ${String(cert.id).padStart(4, '0')}`;
+        certIssuer.textContent = cert.issuer;
+        certDate.textContent = cert.date;
+
+        // Update dots
+        Array.from(indicatorsContainer.children).forEach((dot, idx) => {
+            if (idx === certIndex) {
+                dot.classList.remove('bg-gray-700', 'w-2');
+                dot.classList.add('bg-cyber-cyan', 'w-6');
+            } else {
+                dot.classList.remove('bg-cyber-cyan', 'w-6');
+                dot.classList.add('bg-gray-700', 'w-2');
+            }
+        });
+
+        if (autoPlay) {
+            progressBar.style.animation = 'none';
+            void progressBar.offsetWidth;
+            progressBar.style.animation = 'progress 5s linear 1';
+            
+            clearInterval(certInterval);
+            certInterval = setInterval(() => {
+                certIndex = (certIndex + 1) % certificates.length;
+                updateCarousel(true);
+            }, 5000);
+        } else {
+            clearInterval(certInterval);
+            progressBar.style.animation = 'none';
+        }
+      }
+
+      document.getElementById('prev-cert').onclick = () => {
+        certIndex = (certIndex - 1 + certificates.length) % certificates.length;
+        updateCarousel(false);
+      }
+      
+      document.getElementById('next-cert').onclick = () => {
+        certIndex = (certIndex + 1) % certificates.length;
+        updateCarousel(false);
+      }
+
+      initCarousel();
+
+      window.copyEmail = function() {
+        const email = document.getElementById('contact-email').textContent;
+        navigator.clipboard.writeText(email);
+        alert('Email copied to clipboard!');
+      }
+
+      document.getElementById('contact-form').onsubmit = (e) => {
+        e.preventDefault();
+
+        const form = e.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const message = form.message.value;
+
+        // Create mailto link with user's email as sender
+        const subject = `Message from ${name} - AgusDevSec Website`;
+        const body = `Name: ${name}%0AEmail: ${email}%0A%0AMessage:%0A${message.replace(/\n/g, '%0A')}`;
+
+        const mailtoLink = `mailto:agustriananda20@yahoo.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        // Show confirmation dialog
+        const confirmed = confirm(`Anda akan mengirim email dari: ${email}\nKe: agustriananda20@yahoo.com\n\nPastikan email client Anda sudah dikonfigurasi dan izinkan untuk mengirim pesan ini.`);
+
+        if (confirmed) {
+          const btn = document.getElementById('submit-btn');
+          btn.innerHTML = `<span class="animate-pulse">Opening Email Client...</span>`;
+
+          // Open email client
+          window.location.href = mailtoLink;
+
+          setTimeout(() => {
+              btn.innerHTML = `<span>Message Sent</span> <i data-lucide="check" class="ml-2 w-5 h-5"></i>`;
+              lucide.createIcons();
+              // Reset form
+              form.reset();
+              setTimeout(() => {
+                  btn.innerHTML = `<span>Init Communication</span> <i data-lucide="send" class="ml-2 w-4 h-4"></i>`;
+                  lucide.createIcons();
+              }, 3000);
+          }, 1000);
+        }
+      }
+
+      window.toggleChat = function() {
+        const chatWindow = document.getElementById('chat-window');
+        chatWindow.classList.toggle('hidden');
+      }
+
+      const chatbotResponses = {
+        // Greeting responses
+        'halo': 'Halo! Selamat datang di website AgusDevSec. Ada yang bisa saya bantu?',
+        'hi': 'Hi! Ada yang bisa saya bantu hari ini?',
+        'hello': 'Hello! Selamat datang. Apa yang bisa saya bantu?',
+        'selamat': 'Selamat datang! Ada yang bisa saya bantu?',
+
+        // Services - Web Development
+        'web': 'Saya menyediakan jasa pengembangan website modern dengan teknologi terkini seperti React, Next.js, dan Tailwind CSS. Apa jenis website yang Anda butuhkan?',
+        'website': 'Saya bisa membantu membuat website profesional untuk bisnis Anda. Mulai dari landing page hingga web aplikasi kompleks.',
+        'development': 'Saya fokus pada web development modern dengan teknologi seperti JavaScript, React, Node.js, dan Python.',
+        'programming': 'Saya ahli dalam berbagai bahasa pemrograman: JavaScript, Python, PHP, dan framework modern.',
+        'react': 'Saya bisa membuat aplikasi web dengan React.js untuk pengalaman user yang interaktif dan modern.',
+        'nextjs': 'Next.js adalah framework React favorit saya untuk membuat website dengan performa tinggi dan SEO optimal.',
+        'tailwind': 'Saya menggunakan Tailwind CSS untuk styling yang cepat dan konsisten di semua project.',
+
+        // Services - Cyber Security
+        'cyber': 'Saya menyediakan layanan keamanan siber termasuk penetration testing, vulnerability assessment, dan konsultasi keamanan.',
+        'security': 'Layanan cyber security meliputi: penetration testing, security audit, dan konsultasi keamanan aplikasi web.',
+        'pentest': 'Penetration testing untuk mengidentifikasi kerentanan keamanan sebelum hacker menemukannya.',
+        'vulnerability': 'Vulnerability assessment untuk memindai dan menilai risiko keamanan sistem Anda.',
+        'audit': 'Security audit komprehensif untuk memastikan aplikasi Anda aman dari berbagai ancaman.',
+        'konsultasi': 'Konsultasi keamanan untuk membantu Anda membangun sistem yang lebih aman.',
+
+        // Portfolio/Projects
+        'portfolio': 'Lihat section Projects di website ini untuk melihat portfolio lengkap saya. Saya telah mengerjakan berbagai project web development dan cyber security.',
+        'project': 'Saya telah menyelesaikan banyak project menarik. Kunjungi section Projects untuk detail lengkapnya.',
+        'experience': 'Dengan pengalaman di web development dan cyber security, saya siap membantu project Anda.',
+        'case study': 'Lihat case studies di portfolio untuk memahami bagaimana saya menyelesaikan berbagai tantangan project.',
+
+        // Contact
+        'kontak': 'Anda bisa menghubungi saya melalui email: agustriananda20@yahoo.com atau melalui WhatsApp di 0857-5644-4803.',
+        'email': 'Email saya: agustriananda20@yahoo.com',
+        'hubungi': 'Silakan hubungi saya di agustriananda20@yahoo.com atau WhatsApp 0857-5644-4803 untuk diskusi lebih lanjut.',
+        'wa': 'Untuk komunikasi cepat, Anda bisa menghubungi melalui WhatsApp atau email.',
+        'telepon': 'Untuk diskusi mendalam, silakan hubungi melalui email terlebih dahulu.',
+
+        // Pricing
+        'harga': 'Harga layanan tergantung kompleksitas proyek. Mari kita diskusikan kebutuhan spesifik Anda terlebih dahulu.',
+        'biaya': 'Biaya akan disesuaikan dengan scope dan kompleksitas pekerjaan. Silakan jelaskan proyek Anda.',
+        'budget': 'Budget akan ditentukan berdasarkan requirement dan timeline project. Mari kita bahas detailnya.',
+        'estimasi': 'Estimasi biaya akan saya berikan setelah memahami kebutuhan project Anda secara detail.',
+
+        // Consultation
+        'consultation': 'Saya menyediakan konsultasi gratis untuk diskusi awal project. Silakan jelaskan kebutuhan Anda.',
+        'konsultasi': 'Konsultasi awal gratis untuk memahami kebutuhan dan memberikan solusi terbaik.',
+        'meeting': 'Kita bisa melakukan meeting virtual untuk membahas project Anda lebih detail.',
+        'diskusi': 'Mari kita diskusikan project Anda. Saya siap membantu menemukan solusi terbaik.',
+
+        // About Me
+        'about': 'Saya adalah AgusDevSec, spesialis di web development dan cyber security. Dengan passion di teknologi, saya membantu bisnis berkembang melalui solusi digital yang aman.',
+        'tentang': 'Tentang saya: Full-stack developer dengan fokus pada keamanan aplikasi web. Berpengalaman dalam berbagai teknologi modern.',
+        'background': 'Background saya di computer science dengan spesialisasi di web development dan cyber security.',
+        'skill': 'Skills utama: JavaScript, Python, React, Node.js, Cyber Security, Penetration Testing.',
+
+        // FAQ
+        'faq': 'Pertanyaan umum: Berapa lama pengerjaan project? Timeline tergantung kompleksitas, biasanya 2-8 minggu.',
+        'pertanyaan': 'Ada pertanyaan lain? Saya siap membantu dengan informasi tentang layanan, pricing, atau project.',
+        'timeline': 'Timeline project bervariasi: Landing page (1-2 minggu), Web app kompleks (4-8 minggu), Security audit (1-3 hari).',
+        'deadline': 'Deadline akan disesuaikan dengan kompleksitas dan prioritas project Anda.',
+        'support': 'Saya menyediakan support maintenance dan update setelah project selesai.',
+        'maintenance': 'Layanan maintenance tersedia untuk memastikan website Anda selalu up-to-date dan aman.',
+
+        // Technology specific
+        'javascript': 'JavaScript adalah bahasa utama saya untuk web development. Saya ahli dalam ES6+, React, dan Node.js.',
+        'python': 'Python saya gunakan untuk backend development, data analysis, dan automation scripts.',
+        'php': 'PHP masih saya gunakan untuk legacy systems dan beberapa CMS custom.',
+        'database': 'Saya berpengalaman dengan MySQL, PostgreSQL, dan MongoDB untuk berbagai kebutuhan data.',
+        'api': 'REST API dan GraphQL development untuk integrasi sistem yang robust.',
+        'mobile': 'Saya bisa membuat web responsive dan PWA untuk pengalaman mobile yang optimal.',
+
+        // Business specific
+        'ecommerce': 'E-commerce website dengan payment gateway integration, inventory management, dan admin dashboard.',
+        'cms': 'Custom CMS untuk kemudahan manage konten tanpa coding.',
+        'dashboard': 'Admin dashboard untuk monitoring dan management bisnis Anda.',
+        'analytics': 'Integrasi Google Analytics dan tools monitoring untuk tracking performa.',
+        'seo': 'SEO optimization untuk meningkatkan visibility website Anda di search engine.',
+        'performance': 'Website optimization untuk loading speed dan user experience yang maksimal.',
+
+        // General
+        'bantuan': 'Saya bisa membantu dengan web development, cyber security, konsultasi IT, dan pertanyaan umum lainnya.',
+        'help': 'Saya siap membantu! Apa yang bisa saya bantu hari ini?',
+        'terima kasih': 'Sama-sama! Ada lagi yang bisa saya bantu?',
+        'thanks': 'You\'re welcome! Feel free to ask anything else.',
+        'bye': 'Terima kasih sudah berkunjung! Jangan ragu untuk menghubungi saya jika ada kebutuhan.',
+        'selamat tinggal': 'Sampai jumpa! Semoga hari Anda menyenangkan.',
+
+        // Default fallback
+        'default': 'Terima kasih atas pertanyaan Anda. Untuk informasi lebih detail, silakan hubungi saya di agustriananda20@yahoo.com atau jelaskan lebih spesifik kebutuhan Anda.'
+      };
+
+      // Quick ask function
+      window.quickAsk = function(topic) {
+        const input = document.getElementById('chat-input');
+        const questions = {
+          'web': 'Apa saja layanan web development yang Anda tawarkan?',
+          'cyber': 'Layanan cyber security apa yang tersedia?',
+          'portfolio': 'Bisa lihat portfolio project Anda?',
+          'contact': 'Bagaimana cara menghubungi Anda?',
+          'pricing': 'Berapa estimasi biaya untuk project web?',
+          'consultation': 'Apakah tersedia konsultasi gratis?',
+          'about': 'Ceritakan tentang diri Anda',
+          'faq': 'Pertanyaan yang sering ditanyakan',
+          'ecommerce': 'Apakah Anda bisa buat website e-commerce?',
+          'seo': 'Apakah Anda menyediakan layanan SEO?',
+          'mobile': 'Bisakah website Anda responsive untuk mobile?',
+          'timeline': 'Berapa lama waktu pengerjaan project?'
+        };
+        input.value = questions[topic] || '';
+        input.focus();
+      }
+
+      function getChatbotResponse(message) {
+        const lowerMessage = message.toLowerCase();
+
+        // Check for keywords in the message
+        for (const [key, response] of Object.entries(chatbotResponses)) {
+          if (key !== 'default' && lowerMessage.includes(key)) {
+            return response;
+          }
+        }
+
+        // Return default response if no keywords match
+        return chatbotResponses.default;
+      }
+
+      // Expose sendMessage to window for onclick
+      window.sendMessage = async function() {
+        const input = document.getElementById('chat-input');
+        const messagesContainer = document.getElementById('chat-messages');
+        const text = input.value.trim();
+
+        if (!text) return;
+
+        // User Message
+        const userDiv = document.createElement('div');
+        userDiv.className = "flex justify-end";
+        userDiv.innerHTML = `<div class="max-w-[80%] rounded-lg p-3 text-sm leading-relaxed bg-cyber-cyan text-black rounded-br-none">${text}</div>`;
+        messagesContainer.appendChild(userDiv);
+        input.value = '';
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+        // Loading State
+        const loadingDiv = document.createElement('div');
+        loadingDiv.id = "loading-msg";
+        loadingDiv.className = "flex justify-start";
+        loadingDiv.innerHTML = `<div class="bg-gray-800 rounded-lg p-3 rounded-bl-none border border-gray-700 flex space-x-1"><div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></div><div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-75"></div><div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-150"></div></div>`;
+        messagesContainer.appendChild(loadingDiv);
+
+        // Simulate typing delay
+        setTimeout(() => {
+          document.getElementById('loading-msg').remove();
+
+          const response = getChatbotResponse(text);
+
+          const botDiv = document.createElement('div');
+          botDiv.className = "flex justify-start";
+          botDiv.innerHTML = `<div class="max-w-[80%] rounded-lg p-3 text-sm leading-relaxed bg-gray-800 text-gray-200 rounded-bl-none border border-gray-700">${response}</div>`;
+          messagesContainer.appendChild(botDiv);
+          messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }, 1000 + Math.random() * 1000); // Random delay between 1-2 seconds
+      }
+
+      // Enter key support
+      document.getElementById('chat-input').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') window.sendMessage();
+      });
+
+      // ===========================================
+      // ADVANCED ANIMATIONS & INTERACTIONS
+      // ===========================================
+
+      // Intersection Observer for scroll animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+          }
+        });
+      }, observerOptions);
+
+      // Observe elements for scroll animations
+      document.querySelectorAll('.scroll-fade-in, .scroll-slide-left, .scroll-slide-right, .scroll-zoom').forEach(el => {
+        observer.observe(el);
+      });
+
+      // Add scroll animations to sections
+      // Removed: sections should be visible by default
+      // document.querySelectorAll('section').forEach((section, index) => {
+      //   section.classList.add('scroll-fade-in');
+      //   section.style.animationDelay = `${index * 0.1}s`;
+      // });
+
+      // Add animations to service cards
+      // Removed: service cards should be visible by default
+      // document.querySelectorAll('#services .relative').forEach((card, index) => {
+      //   card.classList.add('scroll-slide-up');
+      //   card.style.animationDelay = `${index * 0.2}s`;
+      // });
+
+      // Add animations to project cards
+      // Removed: project cards should be visible by default
+      // document.querySelectorAll('.project-card').forEach((card, index) => {
+      //   card.classList.add('scroll-zoom');
+      //   card.style.animationDelay = `${index * 0.1}s`;
+      // });
+
+      // Add hover animations to buttons
+      document.querySelectorAll('button, .filter-btn, a[href]').forEach(btn => {
+        btn.classList.add('hover-scale', 'hover-glow');
+      });
+
+      // Add floating animation to icons
+      document.querySelectorAll('i[data-lucide]').forEach((icon, index) => {
+        if (index % 2 === 0) {
+          icon.classList.add('animate-float');
+        } else {
+          icon.classList.add('animate-float-reverse');
+        }
+        icon.style.animationDelay = `${index * 0.5}s`;
+      });
+
+      // Initialize all animations
+      document.addEventListener('DOMContentLoaded', () => {
+        // Enhanced mobile menu animation
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenu) {
+          const mobileBtn = document.getElementById('mobile-menu-btn');
+          mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.add('animate-slide-in-down');
+          });
+        }
+
+        console.log('✨ Website loaded successfully!');
+      });
+
+    </script>
+</body>
+</html>
