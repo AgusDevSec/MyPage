@@ -659,18 +659,18 @@
                         </div>
                     </div>
 
-                    <div class="project-card group relative bg-cyber-slate/60 rounded-lg overflow-hidden border border-dashed border-gray-700 transition-all duration-300 flex flex-col h-full opacity-90" data-category="network">
-                        <div class="relative aspect-video overflow-hidden flex items-center justify-center bg-black/40">
-                            <div class="text-center">
-                                <i data-lucide="alert-octagon" class="w-16 h-16 text-red-500 mx-auto"></i>
-                                <div class="text-xs text-gray-400 mt-2">Belum Ada Konten</div>
-                            </div>
+                    <div class="project-card group relative bg-cyber-slate rounded-lg overflow-hidden border border-gray-800 hover:border-cyber-cyan transition-all duration-300 hover:shadow-[0_0_20px_rgba(6,182,212,0.15)] hover:-translate-y-2 flex flex-col h-full" data-category="network">
+                        <div class="relative aspect-video overflow-hidden">
+                            <img src="images/documentation/dn1.png" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-cyber-slate via-transparent to-transparent opacity-80"></div>
+                            <div class="absolute top-4 right-4 px-3 py-1 bg-black/60 backdrop-blur border border-gray-600 rounded text-xs font-mono text-cyber-cyan uppercase">NETWORK</div>
                         </div>
                         <div class="p-6 flex-1 flex flex-col">
-                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyber-cyan transition-colors">Kosong</h3>
-                            <p class="text-gray-500 text-sm mb-4 line-clamp-3">Proyek ini belum ditambahkan. Klik untuk mengisi nanti.</p>
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyber-cyan transition-colors">Proyek Reconnaissance Tool</h3>
+                            <p class="text-gray-400 text-sm mb-4 line-clamp-3">IGotU adalah tools reconnaissance berbasis Python untuk pengumpulan, enumerasi, dan analisis data awal dalam pengujian keamanan sistem.</p>
                             <div class="flex flex-wrap gap-2 mt-auto">
-                                <span class="px-2 py-1 bg-cyber-dark text-xs text-gray-400 rounded border border-gray-700 font-mono">#DN</span>
+                                <span class="px-2 py-1 bg-cyber-dark text-xs text-gray-300 rounded border border-gray-700 font-mono">#DN</span>
+                                <span class="px-2 py-1 bg-cyber-dark text-xs text-gray-300 rounded border border-gray-700 font-mono">#Network</span>
                             </div>
                         </div>
                     </div>
@@ -1395,8 +1395,30 @@
         startSlideshow();
 
         console.log('✨ Website loaded successfully!');
+
+        // Play music on first click or touch
+        let musicPlayed = false;
+        const playMusic = () => {
+          if (!musicPlayed) {
+            console.log('Attempting to play music');
+            const audio = document.getElementById('bg-audio');
+            if (audio) {
+              audio.load();
+              audio.volume = 1;
+              audio.play().then(() => {
+                console.log('Music started playing');
+                musicPlayed = true;
+              }).catch(e => {
+                console.error('Play failed:', e);
+              });
+            }
+          }
+        };
+        document.addEventListener('click', playMusic);
+        document.addEventListener('touchstart', playMusic);
       });
 
     </script>
+    <audio id="bg-audio" src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" autoplay loop preload="auto" type="audio/mpeg"></audio>
 </body>
 </html>
