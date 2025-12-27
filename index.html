@@ -4,8 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AgusDevSec | Web Dev & Cyber Security</title>
-
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -35,6 +33,9 @@
               'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
               'glitch': 'glitch 1s linear infinite',
               'progress': 'progress 5s linear 1',
+              'typing-long': 'typing 10s steps(400, end) forwards',
+              'slide-in-left': 'slideInLeft 1s ease-out',
+              'fade-in-delayed': 'fadeInDelayed 1s ease-out 2s forwards',
             },
             keyframes: {
               glitch: {
@@ -45,6 +46,14 @@
               progress: {
                 'from': { transform: 'scaleX(0)' },
                 'to': { transform: 'scaleX(1)' }
+              },
+              slideInLeft: {
+                'from': { transform: 'translateX(-100%)', opacity: '0' },
+                'to': { transform: 'translateX(0)', opacity: '1' }
+              },
+              fadeInDelayed: {
+                'from': { opacity: '0' },
+                'to': { opacity: '1' }
               }
             }
           }
@@ -304,6 +313,7 @@
 
       /* Utility Classes for Animations */
       .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
+      .animate-fade-in-delayed { animation: fadeInDelayed 1s ease-out 2s forwards; }
       .animate-slide-in-left { animation: slideInLeft 0.8s ease-out forwards; }
       .animate-slide-in-right { animation: slideInRight 0.8s ease-out forwards; }
       .animate-slide-in-up { animation: slideInUp 0.8s ease-out forwards; }
@@ -320,6 +330,7 @@
       .animate-shake { animation: shake 0.5s ease-in-out; }
       .animate-heartbeat { animation: heartbeat 1.5s ease-in-out infinite; }
       .animate-typing { animation: typing 3s steps(40, end); }
+      .animate-typing-long { animation: typing 10s steps(400, end) forwards; }
       .animate-blink { animation: blink 1s infinite; }
       .animate-gradient-shift { animation: gradient-shift 3s ease infinite; }
       .animate-text-shadow-pulse { animation: text-shadow-pulse 2s ease-in-out infinite; }
@@ -663,19 +674,21 @@
 
                     <div class="project-card group relative bg-cyber-slate rounded-lg overflow-hidden border border-gray-800 hover:border-cyber-cyan transition-all duration-300 hover:shadow-[0_0_20px_rgba(6,182,212,0.15)] hover:-translate-y-2 flex flex-col h-full" data-category="network">
                         <div class="relative aspect-video overflow-hidden">
-                            <img src="images/documentation/dn1.png" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <img id="network-img-1" src="images/documentation/dn1.png" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <img id="network-img-2" src="images/documentation/dn2.png" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 absolute inset-0 opacity-0">
                             <div class="absolute inset-0 bg-gradient-to-t from-cyber-slate via-transparent to-transparent opacity-80"></div>
                             <div class="absolute top-4 right-4 px-3 py-1 bg-black/60 backdrop-blur border border-gray-600 rounded text-xs font-mono text-cyber-cyan uppercase">NETWORK</div>
                         </div>
                         <div class="p-6 flex-1 flex flex-col">
-                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyber-cyan transition-colors">Proyek Reconnaissance Tool</h3>
-                            <p class="text-gray-400 text-sm mb-4 line-clamp-3">IGotU adalah tools reconnaissance berbasis Python untuk pengumpulan, enumerasi, dan analisis data awal dalam pengujian keamanan sistem.</p>
+                            <h3 id="network-title" class="text-xl font-bold text-white mb-2 group-hover:text-cyber-cyan transition-colors">Proyek Reconnaissance Tool</h3>
+                            <p id="network-desc" class="text-gray-400 text-sm mb-4 line-clamp-3">IGotU adalah tools reconnaissance berbasis Python untuk pengumpulan, enumerasi, dan analisis data awal dalam pengujian keamanan sistem.</p>
                             <div class="flex flex-wrap gap-2 mt-auto">
                                 <span class="px-2 py-1 bg-cyber-dark text-xs text-gray-300 rounded border border-gray-700 font-mono">#DN</span>
                                 <span class="px-2 py-1 bg-cyber-dark text-xs text-gray-300 rounded border border-gray-700 font-mono">#Network</span>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -956,6 +969,27 @@
         setTimeout(typeWriter, typeSpeed);
       }
       typeWriter();
+
+      const networkTitles = ["Proyek Reconnaissance Tool", "Foxy - IP Changer"];
+      const networkDescriptions = ["IGotU adalah tools reconnaissance berbasis Python untuk pengumpulan, enumerasi, dan analisis data awal dalam pengujian keamanan sistem.", "Foxy adalah tool IP Changer berbasis Ruby yang menggunakan jaringan Tor untuk merotasi IP secara otomatis."];
+      const titleElement = document.getElementById('network-title');
+      const descElement = document.getElementById('network-desc');
+      const img1 = document.getElementById('network-img-1');
+      const img2 = document.getElementById('network-img-2');
+      let currentIndex = 0;
+
+      setInterval(() => {
+        currentIndex = (currentIndex + 1) % 2;
+        titleElement.textContent = networkTitles[currentIndex];
+        descElement.textContent = networkDescriptions[currentIndex];
+        if (currentIndex === 0) {
+          img1.classList.remove('opacity-0');
+          img2.classList.add('opacity-0');
+        } else {
+          img1.classList.add('opacity-0');
+          img2.classList.remove('opacity-0');
+        }
+      }, 7000);
 
       const filterBtns = document.querySelectorAll('.filter-btn');
       const projects = document.querySelectorAll('.project-card');
